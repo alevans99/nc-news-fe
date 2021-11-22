@@ -1,7 +1,7 @@
 import './App.css';
-import { UserContext } from './componenets/contexts/UserContext';
+import { UserContext } from './contexts/UserContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
+import Nav from './componenets/Nav';
 import { useEffect, useState } from 'react';
 import { getTopics } from './utils/api';
 
@@ -21,7 +21,7 @@ function App() {
     <BrowserRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
         <div className='App'>
-          <header className='App-header'></header>
+          <Nav></Nav>
         </div>
       </UserContext.Provider>
     </BrowserRouter>
