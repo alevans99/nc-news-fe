@@ -9,3 +9,9 @@ export const getTopics = async () => {
   const topicObjects = result.data.topics;
   return topicObjects;
 };
+
+export const getArticles = async () => {
+  const result = await newsApi.get('/articles');
+  const articleObjects = result.data.articles;
+  return articleObjects;
+};

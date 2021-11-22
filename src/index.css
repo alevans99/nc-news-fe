@@ -18,3 +18,16 @@ code {
   padding: 0;
   box-sizing: border-box;
 }
+
+.icon-attribution {
+  font-size: 0.9rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.attribution-link {
+  text-decoration: none;
+  color: #fff;
+}

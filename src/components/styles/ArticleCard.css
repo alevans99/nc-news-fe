@@ -1,0 +1,82 @@
+.ArticleCard {
+  display: grid;
+  background-color: #eaeaea;
+  color: #252a34;
+  font-family: 'Raleway', sans-serif;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 250px;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'card-vote card-title card-comments'
+    'card-vote card-author card-comments'
+    'card-vote card-link card-comments';
+  padding: 30px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.article-card-vote-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  grid-area: card-vote;
+}
+.article-card-inc-vote-button {
+}
+
+.article-card-inc-vote-button:hover {
+  background-color: #b8fffe;
+}
+.article-card-inc-vote-button:active {
+  background-color: #dafefd;
+  transform: translateY(1px);
+}
+.ac-vote-button {
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.ac-button-image {
+  width: 60px;
+}
+
+.article-card-inc-arrow {
+}
+
+.article-card-dec-vote-button {
+}
+.article-card-dec-vote-button:hover {
+  background-color: #ffd9e2;
+}
+
+.article-card-dec-vote-button:active {
+  background-color: #fff1f4;
+  transform: translateY(1px);
+}
+
+.article-card-dec-arrow {
+}
+
+.article-card-vote-count {
+  width: 82px;
+  text-align: center;
+}
+
+.article-card-title {
+  grid-area: card-title;
+}
+
+.article-card-author {
+  grid-area: card-author;
+}
+
+.article-card-read-button {
+  grid-area: card-link;
+  width: 200px;
+  height: 80px;
+  border-radius: 6px;
+}
+
+.article-card-comments-count {
+  grid-area: card-comments;
+}
