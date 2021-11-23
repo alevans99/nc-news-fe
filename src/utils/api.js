@@ -15,3 +15,11 @@ export const getArticles = async () => {
   const articleObjects = result.data.articles;
   return articleObjects;
 };
+
+export const patchArticleVotes = async (articleId, voteChange) => {
+  const result = await newsApi.patch(`/articles/${articleId}`, {
+    inc_votes: voteChange,
+  });
+  const articleObject = result.data.article;
+  return articleObject;
+};

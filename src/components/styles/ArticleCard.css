@@ -13,6 +13,7 @@
   border-radius: 6px;
   box-sizing: border-box;
   justify-content: center;
+  border: 1px #252a34 solid;
 }
 
 .article-card-vote-container {
@@ -64,9 +65,18 @@
   font-size: 2rem;
 }
 
-.article-card-title {
+.article-card-link {
+  text-decoration: none;
+  color: #252a34;
   grid-area: card-title;
+}
+
+.article-card-title {
   font-size: 2.5rem;
+}
+
+.article-card-title:hover {
+  color: #ff2e63;
 }
 
 .article-card-author {
