@@ -1,5 +1,6 @@
 .Article {
   display: flex;
+  justify-content: center;
 }
 
 .article-body-container {

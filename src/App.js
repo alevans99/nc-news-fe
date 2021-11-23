@@ -10,6 +10,7 @@ import Article from './components/Article';
 function App() {
   const [allTopics, setAllTopics] = useState([]);
   const [currentUser, setCurrentUser] = useState({ username: 'jessjelly' });
+  const [currentTopic, setCurrentTopic] = useState('all');
 
   //Maintain list of all topics
   useEffect(() => {
@@ -26,10 +27,19 @@ function App() {
     <BrowserRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
         <div className='App'>
-          <Nav></Nav>
+          <Nav currentTopic={currentTopic}></Nav>
           <Routes>
             <Route path='/' element={<Navigate replace to='/articles' />} />
-            <Route path='/articles' element={<Articles></Articles>}></Route>
+            <Route
+              path='/articles'
+              element={
+                <Articles
+                  allTopics={allTopics}
+                  currentTopic={currentTopic}
+                  setCurrentTopic={setCurrentTopic}
+                ></Articles>
+              }
+            ></Route>
             <Route
               path='/articles/:article_id'
               element={<Article></Article>}

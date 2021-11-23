@@ -1,0 +1,9 @@
+.ArticlesMenu {
+  display: flex;
+  justify-content: center;
+}
+
+.articles-menu-topic-select {
+  font-size: 1.5rem;
+  margin-top: 30px;
+}
