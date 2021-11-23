@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import { useEffect, useState } from 'react';
 import { getTopics } from './utils/api';
 import Articles from './components/Articles';
+import Article from './components/Article';
 
 function App() {
   const [allTopics, setAllTopics] = useState([]);
@@ -29,6 +30,10 @@ function App() {
           <Routes>
             <Route path='/' element={<Navigate replace to='/articles' />} />
             <Route path='/articles' element={<Articles></Articles>}></Route>
+            <Route
+              path='/articles/:article_id'
+              element={<Article></Article>}
+            ></Route>
           </Routes>
         </div>
       </UserContext.Provider>

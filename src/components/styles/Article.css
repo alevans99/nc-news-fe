@@ -1,0 +1,33 @@
+.Article {
+  display: flex;
+}
+
+.article-body-container {
+  display: flex;
+  justify-content: center;
+}
+
+.article-detail-container {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  width: 80%;
+}
+
+.article-detail-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.article-detail-information {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.article-detail-date {
+  margin-bottom: 40px;
+}
+
+.article-detail-text {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  font-weight: 300;
+}

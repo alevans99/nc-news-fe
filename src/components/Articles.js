@@ -10,7 +10,6 @@ function Articles({}) {
   const [allArticles, setAllArticles] = useState([]);
   const [articlesLoading, setArticlesLoading] = useState(true);
 
-  console.log(allArticles);
   useEffect(() => {
     setArticlesLoading(true);
     getArticles()
