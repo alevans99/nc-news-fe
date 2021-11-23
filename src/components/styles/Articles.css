@@ -1,7 +1,15 @@
 .Articles {
+  display: flex;
+  justify-content: center;
+}
+
+.articles-body {
+  display: flex;
+  justify-content: center;
 }
 
 .articles-container {
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 30px;

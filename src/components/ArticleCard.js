@@ -25,7 +25,7 @@ function ArticleCard({ article }) {
       </div>
       <h2 className='article-card-title'>{article.title}</h2>
       <h3 className='article-card-author'>{`Posted by ${article.author} in ${article.topic}`}</h3>
-      <button className='article-card-read-button'>Read Article</button>
+      {/* <button className='article-card-read-button'>Read Article</button> */}
       <h3 className='article-card-comments-count'>
         {`${article.comment_count} Comments`}
       </h3>

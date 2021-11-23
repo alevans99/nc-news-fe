@@ -3,16 +3,16 @@
   background-color: #eaeaea;
   color: #252a34;
   font-family: 'Raleway', sans-serif;
-  grid-template-columns: 1fr 2fr 1fr;
-  height: 250px;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: min-content 5fr 2fr;
+  height: min-content;
+  grid-template-rows: 1fr min-content;
   grid-template-areas:
-    'card-vote card-title card-comments'
-    'card-vote card-author card-comments'
-    'card-vote card-link card-comments';
+    'card-vote card-title card-title'
+    'card-vote card-author card-comments';
   padding: 30px;
   border-radius: 6px;
   box-sizing: border-box;
+  justify-content: center;
 }
 
 .article-card-vote-container {
@@ -20,6 +20,7 @@
   flex-direction: column;
   align-items: flex-start;
   grid-area: card-vote;
+  padding-right: 30px;
 }
 .article-card-inc-vote-button {
 }
@@ -37,7 +38,7 @@
 }
 
 .ac-button-image {
-  width: 60px;
+  width: 40px;
 }
 
 .article-card-inc-arrow {
@@ -58,25 +59,24 @@
 }
 
 .article-card-vote-count {
-  width: 82px;
-  text-align: center;
+  height: 40px;
+  align-self: center;
+  font-size: 2rem;
 }
 
 .article-card-title {
   grid-area: card-title;
+  font-size: 2.5rem;
 }
 
 .article-card-author {
   grid-area: card-author;
-}
-
-.article-card-read-button {
-  grid-area: card-link;
-  width: 200px;
-  height: 80px;
-  border-radius: 6px;
+  justify-self: end;
+  align-self: flex-end;
 }
 
 .article-card-comments-count {
   grid-area: card-comments;
+  justify-self: end;
+  align-self: flex-end;
 }
