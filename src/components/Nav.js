@@ -1,19 +1,63 @@
 import './styles/Nav.css';
 import { UserContext } from '../contexts/UserContext';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import { capitaliseString } from '../utils/utils';
+import TopicDropdown from './TopicDropdown';
 
-function Nav({ currentTopic }) {
+function Nav({ currentTopic, setCurrentTopic, allTopics }) {
   const { currentUser } = useContext(UserContext);
+  const [topicDropdownVisibility, setTopicDropdownVisibility] = useState(false);
+
+  const dropdownRef = useRef(null);
+  const toggleDropdown = () => {
+    setTopicDropdownVisibility((previous) => {
+      return !previous;
+    });
+  };
+
+  const checkClickLocation = (e) => {
+    if (dropdownRef.current && topicDropdownVisibility) {
+      if (!dropdownRef.current.contains(e.target)) {
+        setTopicDropdownVisibility(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', checkClickLocation);
+
+    return () => {
+      document.removeEventListener('mousedown', checkClickLocation);
+    };
+  }, [topicDropdownVisibility]);
+
+  useEffect(() => {
+    setTopicDropdownVisibility(false);
+  }, [currentTopic]);
 
   return (
     <div className={`Nav`}>
       <h1 className='nav-title'>NC News</h1>
+      <div className='nav-topic-container' ref={dropdownRef}>
+        <button
+          className='nav-topic'
+          onClick={(e) => {
+            toggleDropdown();
+          }}
+        >
+          {currentTopic === 'all'
+            ? 'All Topics'
+            : capitaliseString(currentTopic)}
+        </button>
 
-      <h2 className='nav-topic'>
-        {currentTopic === 'all' ? 'All Topics' : capitaliseString(currentTopic)}
-      </h2>
+        <TopicDropdown
+          isVisible={topicDropdownVisibility}
+          currentTopic={currentTopic}
+          setCurrentTopic={setCurrentTopic}
+          allTopics={allTopics}
+        ></TopicDropdown>
+      </div>
 
       <div className='nav-profile-container'>
         <h3 className='nav-user'>{`Logged in as ${currentUser.username}`}</h3>

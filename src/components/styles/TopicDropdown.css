@@ -1,0 +1,24 @@
+.TopicDropdown {
+  position: absolute;
+  width: 200px;
+  margin-top: 50px;
+}
+
+.topic-dropdown-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.topic-dropdown-button {
+  font-size: 1.2rem;
+  padding: 10px;
+}
+.topic-dropdown-button:hover {
+  background-color: #ff2e63;
+  color: #eaeaea;
+  border: 2px #ff2e63 solid;
+}
+.topic-dropdown-button:active {
+  background-color: #ff7094;
+  color: #eaeaea;
+}

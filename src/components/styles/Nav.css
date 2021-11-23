@@ -16,11 +16,25 @@
   font-size: 4rem;
   line-height: 1;
 }
-.nav-topic {
+.nav-topic-container {
+  display: flex;
   grid-area: topic;
   align-self: end;
   justify-self: center;
+  justify-content: center;
+}
+
+.nav-topic {
   font-size: 2rem;
+  background-color: #ff2e63;
+  border: none;
+  color: #eaeaea;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+}
+.nav-topic:hover {
+  color: #08d9d6;
+  font-family: 'Raleway', sans-serif;
 }
 
 .nav-profile-container {

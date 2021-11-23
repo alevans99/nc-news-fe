@@ -27,7 +27,11 @@ function App() {
     <BrowserRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
         <div className='App'>
-          <Nav currentTopic={currentTopic}></Nav>
+          <Nav
+            currentTopic={currentTopic}
+            setCurrentTopic={setCurrentTopic}
+            allTopics={allTopics}
+          ></Nav>
           <Routes>
             <Route path='/' element={<Navigate replace to='/articles' />} />
             <Route

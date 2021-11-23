@@ -12,7 +12,6 @@ function ArticlesMenu({ allTopics, currentTopic, setCurrentTopic }) {
         className='articles-menu-topic-select'
         onChange={(e) => {
           const topic = e.target.value;
-          console.log('topic changed to ', topic);
           setCurrentTopic(topic);
         }}
       >
