@@ -16,10 +16,7 @@ const TopicDropdown = ({
     <div className='TopicDropdown'>
       {isVisible ? (
         <div className='topic-dropdown-container'>
-          <Link
-            className='topic-dropdown-link'
-            to={`/topics/${currentTopic}/articles`}
-          >
+          <Link className='topic-dropdown-link' to={`/topics/all/articles`}>
             <button
               className='topic-dropdown-button'
               value='all'

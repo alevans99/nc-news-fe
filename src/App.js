@@ -33,8 +33,11 @@ function App() {
             allTopics={allTopics}
           ></Nav>
           <Routes>
-            <Route path='/' element={<Navigate replace to='/articles' />} />
             <Route
+              path='/'
+              element={<Navigate replace to='/topics/all/articles' />}
+            />
+            {/* <Route
               path='/articles'
               element={
                 <Articles
@@ -43,7 +46,7 @@ function App() {
                   setCurrentTopic={setCurrentTopic}
                 ></Articles>
               }
-            ></Route>
+            ></Route> */}
 
             <Route
               path='/articles/:article_id'

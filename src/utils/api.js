@@ -10,18 +10,19 @@ export const getTopics = async () => {
   return topicObjects;
 };
 
-export const getArticles = async (topic, sortQuery) => {
+export const getArticles = async (topic, sortQuery, pageQuery) => {
   let optionalQueries = {};
 
   optionalQueries['sort_by'] = sortQuery;
+  optionalQueries['p'] = pageQuery;
   if (topic !== 'all' && topic !== undefined) {
     optionalQueries['topic'] = topic;
   }
   console.log(optionalQueries, 'optional queries');
   const result = await newsApi.get('/articles', { params: optionalQueries });
   console.log(result);
-  const articleObjects = result.data.articles;
-  return articleObjects;
+  const articleObject = result.data;
+  return articleObject;
 };
 
 export const getArticleById = async (articleId) => {

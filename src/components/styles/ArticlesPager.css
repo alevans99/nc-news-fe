@@ -1,0 +1,36 @@
+.ArticlesPager {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.articles-pager-page-link {
+  width: 100px;
+  height: 60px;
+  border-radius: 6px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5rem;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eaeaea;
+  color: #252a34;
+  border: 1px #252a34 solid;
+}
+
+.articles-pager-page-link:hover {
+  background-color: #ff2e63;
+  color: #eaeaea;
+}
+
+.articles-pager-page-link:link {
+  background-color: #f47c9a;
+  color: #eaeaea;
+}
+
+.page-link-selected {
+  background-color: #ff2e63;
+  color: #eaeaea;
+  pointer-events: none;
+}
