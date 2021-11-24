@@ -1,0 +1,78 @@
+.CommentCard {
+  display: grid;
+  background-color: #eaeaea;
+  color: #252a34;
+  font-family: 'Raleway', sans-serif;
+  grid-template-columns: min-content 5fr 2fr;
+  height: min-content;
+  grid-template-rows: 1fr min-content;
+  grid-template-areas:
+    'card-vote card-body card-body'
+    'card-vote card-author card-author';
+  padding: 30px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  justify-content: center;
+  border: 1px #252a34 solid;
+}
+
+.comment-card-vote-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  grid-area: card-vote;
+  padding-right: 30px;
+}
+.comment-card-inc-vote-button {
+}
+
+.comment-card-inc-vote-button:hover {
+  background-color: #b8fffe;
+}
+.comment-card-inc-vote-button:active {
+  background-color: #dafefd;
+  transform: translateY(1px);
+}
+.cc-vote-button {
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.cc-button-image {
+  width: 40px;
+}
+
+.comment-card-inc-arrow {
+}
+
+.comment-card-dec-vote-button {
+}
+.comment-card-dec-vote-button:hover {
+  background-color: #ffd9e2;
+}
+
+.comment-card-dec-vote-button:active {
+  background-color: #fff1f4;
+  transform: translateY(1px);
+}
+
+.comment-card-dec-arrow {
+}
+
+.comment-card-vote-count {
+  height: 40px;
+  align-self: center;
+  font-size: 2rem;
+}
+
+.comment-card-body {
+  font-size: 1.4rem;
+  font-weight: 400;
+  grid-area: card-body;
+}
+
+.comment-card-author {
+  grid-area: card-author;
+  justify-self: end;
+  align-self: flex-end;
+}

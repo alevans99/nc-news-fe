@@ -1,14 +1,16 @@
 import './styles/Article.css';
-import { UserContext } from '../contexts/UserContext';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getArticleById } from '../utils/api';
 import Loading from './Loading';
 import { dateFormatter } from '../utils/utils';
+import Comments from './Comments';
 
-function Article({}) {
+function Article() {
   const [currentArticle, setCurrentArticle] = useState({});
   const [articleLoading, setArticleLoading] = useState(true);
+  const [commentsLoading, setCommentsLoading] = useState(false);
+
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -22,7 +24,7 @@ function Article({}) {
         console.log(err);
         setArticleLoading(false);
       });
-  }, []);
+  }, [article_id]);
 
   return (
     <div className={`Article`}>
@@ -35,6 +37,13 @@ function Article({}) {
               currentArticle.created_at
             )}`}</h3>
             <p className='article-detail-text'>{currentArticle.body}</p>
+          </div>
+        </div>
+      </Loading>
+      <Loading isLoading={commentsLoading} loadingText='Loading Comments'>
+        <div className='comments-body-container'>
+          <div className='comments-detail-container'>
+            <Comments articleId={article_id}></Comments>
           </div>
         </div>
       </Loading>

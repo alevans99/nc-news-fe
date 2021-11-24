@@ -16,15 +16,15 @@ function Nav({ currentTopic, setCurrentTopic, allTopics }) {
     });
   };
 
-  const checkClickLocation = (e) => {
-    if (dropdownRef.current && topicDropdownVisibility) {
-      if (!dropdownRef.current.contains(e.target)) {
-        setTopicDropdownVisibility(false);
-      }
-    }
-  };
-
   useEffect(() => {
+    const checkClickLocation = (e) => {
+      if (dropdownRef.current && topicDropdownVisibility) {
+        if (!dropdownRef.current.contains(e.target)) {
+          setTopicDropdownVisibility(false);
+        }
+      }
+    };
+
     document.addEventListener('mousedown', checkClickLocation);
 
     return () => {

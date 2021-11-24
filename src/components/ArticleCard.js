@@ -1,6 +1,6 @@
 import './styles/ArticleCard.css';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import incArrow from '../images/up-arrow.png';
 import decArrow from '../images/down-arrow.png';
 import { patchArticleVotes } from '../utils/api';
@@ -9,15 +9,12 @@ function ArticleCard({ article }) {
   const [articleVotes, setArticleVotes] = useState(article.votes);
 
   const changeVote = (voteChange) => {
-    console.log('changing vote');
     setArticleVotes((previousVotes) => {
       return previousVotes + voteChange;
     });
 
     patchArticleVotes(article.article_id, voteChange)
-      .then((result) => {
-        console.log('updated article', result);
-      })
+      .then((result) => {})
       .catch((err) => {
         console.log(err);
       });
@@ -35,6 +32,7 @@ function ArticleCard({ article }) {
           <img
             className='article-card-inc-arrow ac-button-image'
             src={incArrow}
+            alt='up arrow'
           ></img>
         </button>
         <h3 className='article-card-vote-count'>{`${articleVotes}`}</h3>
@@ -48,6 +46,7 @@ function ArticleCard({ article }) {
           <img
             className='article-card-dec-arrow ac-button-image'
             src={decArrow}
+            alt='down arrow'
           ></img>
         </button>
       </div>

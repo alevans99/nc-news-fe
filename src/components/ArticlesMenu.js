@@ -1,7 +1,4 @@
 import './styles/ArticlesMenu.css';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { capitaliseString } from '../utils/utils';
 
 function ArticlesMenu({ sortQuery, setSortQuery }) {
   return (

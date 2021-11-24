@@ -1,5 +1,5 @@
 import './styles/Articles.css';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getArticles } from '../utils/api';
 import ArticleCard from './ArticleCard';
@@ -28,7 +28,7 @@ function Articles({ allTopics, currentTopic, setCurrentTopic }) {
     } else {
       setPageQuery('1');
     }
-  }, [pageRequested]);
+  }, [pageRequested, topic, setCurrentTopic]);
 
   useEffect(() => {
     setArticlesLoading(true);

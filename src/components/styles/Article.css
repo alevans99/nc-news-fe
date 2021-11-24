@@ -1,6 +1,7 @@
 .Article {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .article-body-container {
@@ -31,4 +32,12 @@
   font-size: 1.5rem;
   line-height: 1.6;
   font-weight: 300;
+}
+.comments-body-container {
+  display: flex;
+  justify-content: center;
+}
+.comments-detail-container {
+  width: 80%;
+  justify-self: center;
 }

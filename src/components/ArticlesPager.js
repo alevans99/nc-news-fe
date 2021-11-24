@@ -7,9 +7,7 @@ function ArticlesPager({
   setPageQuery,
   currentTopic,
 }) {
-  console.log(totalArticles);
   const numberOfPages = Math.ceil(totalArticles / 10);
-  console.log(numberOfPages, 'pages');
   const pageArray = [];
   for (let i = 1; i <= numberOfPages; i++) {
     pageArray.push(`${i}`);

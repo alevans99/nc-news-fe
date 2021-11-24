@@ -18,9 +18,7 @@ export const getArticles = async (topic, sortQuery, pageQuery) => {
   if (topic !== 'all' && topic !== undefined) {
     optionalQueries['topic'] = topic;
   }
-  console.log(optionalQueries, 'optional queries');
   const result = await newsApi.get('/articles', { params: optionalQueries });
-  console.log(result);
   const articleObject = result.data;
   return articleObject;
 };
@@ -37,4 +35,25 @@ export const patchArticleVotes = async (articleId, voteChange) => {
   });
   const articleObject = result.data.article;
   return articleObject;
+};
+
+export const getComments = async (articleId, pageQuery) => {
+  let optionalQueries = {};
+
+  optionalQueries['p'] = pageQuery;
+
+  const result = await newsApi.get(`/articles/${articleId}/comments`, {
+    params: optionalQueries,
+  });
+
+  const commentsObject = result.data;
+  return commentsObject;
+};
+
+export const patchCommentVotes = async (commentId, voteChange) => {
+  const result = await newsApi.patch(`/comments/${commentId}`, {
+    inc_votes: voteChange,
+  });
+  const commentObject = result.data.comment;
+  return commentObject;
 };
