@@ -3,26 +3,19 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { capitaliseString } from '../utils/utils';
 
-function ArticlesMenu({ allTopics, currentTopic, setCurrentTopic }) {
-  console.log('current topic is ', currentTopic);
+function ArticlesMenu({ sortQuery, setSortQuery }) {
   return (
     <div className={`ArticlesMenu`}>
       <select
-        value={currentTopic}
-        className='articles-menu-topic-select'
+        value={sortQuery}
+        className='articles-menu-sort-select'
         onChange={(e) => {
-          const topic = e.target.value;
-          setCurrentTopic(topic);
+          setSortQuery(e.target.value);
         }}
       >
-        <option value='all'>All Topics</option>
-        {allTopics.map((topic) => {
-          return (
-            <option key={topic.slug} value={topic.slug}>
-              {capitaliseString(topic.slug)}
-            </option>
-          );
-        })}
+        <option value='created_at'>Newest</option>
+        <option value='comment_count'>Comments</option>
+        <option value='votes'>Votes</option>
       </select>
     </div>
   );

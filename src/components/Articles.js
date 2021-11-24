@@ -7,10 +7,11 @@ import Loading from './Loading';
 import ArticlesMenu from './ArticlesMenu';
 
 function Articles({ allTopics, currentTopic, setCurrentTopic }) {
+  const [sortQuery, setSortQuery] = useState('created_at');
   const [allArticles, setAllArticles] = useState([]);
   const [articlesLoading, setArticlesLoading] = useState(true);
   const { topic } = useParams();
-
+  console.log(sortQuery, 'sorted');
   //Checks is the URL provides a parametric for topic on first render
   useEffect(() => {
     if (topic !== undefined) {
@@ -20,7 +21,7 @@ function Articles({ allTopics, currentTopic, setCurrentTopic }) {
 
   useEffect(() => {
     setArticlesLoading(true);
-    getArticles(currentTopic)
+    getArticles(currentTopic, sortQuery)
       .then((articles) => {
         setAllArticles(articles);
         setArticlesLoading(false);
@@ -29,15 +30,14 @@ function Articles({ allTopics, currentTopic, setCurrentTopic }) {
         console.log(err);
         setArticlesLoading(false);
       });
-  }, [currentTopic]);
+  }, [currentTopic, sortQuery]);
 
   return (
     <div className={`Articles`}>
       <Loading isLoading={articlesLoading}>
         <ArticlesMenu
-          allTopics={allTopics}
-          currentTopic={currentTopic}
-          setCurrentTopic={setCurrentTopic}
+          sortQuery={sortQuery}
+          setSortQuery={setSortQuery}
         ></ArticlesMenu>
         <div className='articles-body'>
           <div className='articles-container'>

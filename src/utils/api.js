@@ -10,9 +10,10 @@ export const getTopics = async () => {
   return topicObjects;
 };
 
-export const getArticles = async (topic) => {
+export const getArticles = async (topic, sortQuery) => {
   let optionalQueries = {};
 
+  optionalQueries['sort_by'] = sortQuery;
   if (topic !== 'all' && topic !== undefined) {
     optionalQueries['topic'] = topic;
   }
