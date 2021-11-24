@@ -1,5 +1,5 @@
 import './styles/Articles.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getArticles } from '../utils/api';
 import ArticleCard from './ArticleCard';
@@ -9,6 +9,14 @@ import ArticlesMenu from './ArticlesMenu';
 function Articles({ allTopics, currentTopic, setCurrentTopic }) {
   const [allArticles, setAllArticles] = useState([]);
   const [articlesLoading, setArticlesLoading] = useState(true);
+  const { topic } = useParams();
+
+  //Checks is the URL provides a parametric for topic on first render
+  useEffect(() => {
+    if (topic !== undefined) {
+      setCurrentTopic(topic);
+    }
+  }, []);
 
   useEffect(() => {
     setArticlesLoading(true);
@@ -34,7 +42,12 @@ function Articles({ allTopics, currentTopic, setCurrentTopic }) {
         <div className='articles-body'>
           <div className='articles-container'>
             {allArticles.map((article) => {
-              return <ArticleCard article={article}></ArticleCard>;
+              return (
+                <ArticleCard
+                  key={article.article_id}
+                  article={article}
+                ></ArticleCard>
+              );
             })}
           </div>
         </div>

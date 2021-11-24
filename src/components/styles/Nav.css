@@ -35,6 +35,7 @@
 .nav-topic:hover {
   color: #08d9d6;
   font-family: 'Raleway', sans-serif;
+  cursor: pointer;
 }
 
 .nav-profile-container {

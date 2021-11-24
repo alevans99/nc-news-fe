@@ -44,9 +44,20 @@ function App() {
                 ></Articles>
               }
             ></Route>
+
             <Route
               path='/articles/:article_id'
               element={<Article></Article>}
+            ></Route>
+            <Route
+              path='/topics/:topic/articles'
+              element={
+                <Articles
+                  allTopics={allTopics}
+                  currentTopic={currentTopic}
+                  setCurrentTopic={setCurrentTopic}
+                ></Articles>
+              }
             ></Route>
           </Routes>
         </div>
