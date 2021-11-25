@@ -41,7 +41,7 @@ export const getComments = async (articleId, pageQuery) => {
   let optionalQueries = {};
 
   optionalQueries['p'] = pageQuery;
-
+  console.log('comments extra queries', optionalQueries);
   const result = await newsApi.get(`/articles/${articleId}/comments`, {
     params: optionalQueries,
   });

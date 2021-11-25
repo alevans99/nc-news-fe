@@ -1,39 +1,116 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import loadingSpinner from '../images/spinner.png';
 
 import { getComments } from '../utils/api';
 import './styles/Comments.css';
 import CommentCard from './CommentCard';
+import Loading from './Loading';
 
 function Comments({ articleId }) {
   const [allComments, setAllComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
-  const [pageQuery, setPageQuery] = useState('1');
+  const [scrollCommentsLoading, setScrollCommentsLoading] = useState(false);
+
+  const [pageQuery, setPageQuery] = useState(1);
   const [totalComments, setTotalComments] = useState(0);
+  const [totalCommentsDisplayed, setTotalCommentsDisplayed] = useState(0);
+  const [userReachedEnd, setUserReachedEnd] = useState(false);
 
   useEffect(() => {
-    setCommentsLoading(true);
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    function handleScroll(e) {
+      if (
+        window.innerHeight + window.pageYOffset - 2 >=
+          document.body.offsetHeight &&
+        !userReachedEnd &&
+        !commentsLoading &&
+        !scrollCommentsLoading
+      ) {
+        setUserReachedEnd(true);
+
+        if (totalCommentsDisplayed < totalComments) {
+          setPageQuery((previousPage) => {
+            return previousPage + 1;
+          });
+        } else {
+          //console.log('There are no more comments to load');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [
+    totalCommentsDisplayed,
+    totalComments,
+    userReachedEnd,
+    commentsLoading,
+    scrollCommentsLoading,
+  ]);
+
+  useEffect(() => {
+    if (pageQuery === 1) {
+      setCommentsLoading(true);
+    } else {
+      setScrollCommentsLoading(true);
+    }
 
     getComments(articleId, pageQuery)
       .then((comments) => {
-        setAllComments(comments.comments);
-        setTotalComments(comments.total_count);
+        setTotalComments((previousTotal) => {
+          return Number(comments.total_count);
+        });
+
+        setAllComments((previousComments) => {
+          return [...previousComments, ...comments.comments];
+        });
+
+        setTotalCommentsDisplayed((previousNumber) => {
+          return previousNumber + comments.comments.length;
+        });
+
+        console.log('comments loading in comments');
         setCommentsLoading(false);
+        setScrollCommentsLoading(false);
+        setUserReachedEnd(false);
       })
       .catch((err) => {
         console.log(err);
+        setScrollCommentsLoading(false);
         setCommentsLoading(false);
       });
   }, [articleId, pageQuery]);
 
   return (
     <div className={`Comments`}>
-      <h2 className='comments-title'>Comments</h2>
-      <div className='comments-container'>
-        {allComments.map((comment) => {
-          return <CommentCard comment={comment}></CommentCard>;
-        })}
-      </div>
+      <Loading isLoading={commentsLoading} loadingText='Loading Comments'>
+        <h2 className='comments-title'>Comments</h2>
+        <div className='comments-container'>
+          {allComments.map((comment) => {
+            return <CommentCard comment={comment}></CommentCard>;
+          })}
+          {scrollCommentsLoading ? (
+            <div className='comments-loading-more-container'>
+              <img
+                className='comments-loading-spinner'
+                src={loadingSpinner}
+                alt='spinning arrow'
+              ></img>
+
+              <h2 className='comments-loading-text'>
+                Loading More Comments...
+              </h2>
+            </div>
+          ) : null}
+        </div>
+      </Loading>
     </div>
   );
 }

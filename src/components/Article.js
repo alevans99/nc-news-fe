@@ -9,9 +9,11 @@ import Comments from './Comments';
 function Article() {
   const [currentArticle, setCurrentArticle] = useState({});
   const [articleLoading, setArticleLoading] = useState(true);
-  const [commentsLoading, setCommentsLoading] = useState(false);
+  const [commentsLoading, setCommentsLoading] = useState(true);
 
   const { article_id } = useParams();
+
+  console.log('commentsLoading changed to ', commentsLoading);
 
   useEffect(() => {
     setArticleLoading(true);
@@ -40,13 +42,17 @@ function Article() {
           </div>
         </div>
       </Loading>
-      <Loading isLoading={commentsLoading} loadingText='Loading Comments'>
-        <div className='comments-body-container'>
-          <div className='comments-detail-container'>
-            <Comments articleId={article_id}></Comments>
-          </div>
+      {/* <Loading isLoading={commentsLoading} loadingText='Loading Comments'> */}
+      <div className='comments-body-container'>
+        <div className='comments-detail-container'>
+          <Comments
+            articleId={article_id}
+            setCommentsLoading={setCommentsLoading}
+            commentsLoading={commentsLoading}
+          ></Comments>
         </div>
-      </Loading>
+      </div>
+      {/* </Loading> */}
     </div>
   );
 }

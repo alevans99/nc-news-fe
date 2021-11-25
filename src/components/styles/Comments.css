@@ -6,3 +6,31 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.comments-loading-more-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.comments-loading-spinner {
+  margin-bottom: 20px;
+  width: 100px;
+  height: 140px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.comments-loading-text {
+  font-size: 2rem;
+}
