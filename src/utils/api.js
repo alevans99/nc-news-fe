@@ -39,7 +39,7 @@ export const patchArticleVotes = async (articleId, voteChange) => {
 
 export const getComments = async (articleId, pageQuery) => {
   let optionalQueries = {};
-
+  console.log('getting comments');
   optionalQueries['p'] = pageQuery;
   console.log('comments extra queries', optionalQueries);
   const result = await newsApi.get(`/articles/${articleId}/comments`, {
@@ -56,4 +56,14 @@ export const patchCommentVotes = async (commentId, voteChange) => {
   });
   const commentObject = result.data.comment;
   return commentObject;
+};
+
+export const postNewComment = async (articleId, username, body) => {
+  console.log(username, body);
+  const result = await newsApi.post(`/articles/${articleId}/comments`, {
+    username,
+    body,
+  });
+  const postedComment = result.data.comment;
+  return postedComment;
 };

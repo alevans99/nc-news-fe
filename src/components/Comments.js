@@ -6,16 +6,39 @@ import { getComments } from '../utils/api';
 import './styles/Comments.css';
 import CommentCard from './CommentCard';
 import Loading from './Loading';
+import Collapsable from './Collapsable';
+import NewComment from './NewComment';
 
 function Comments({ articleId }) {
   const [allComments, setAllComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(true);
   const [scrollCommentsLoading, setScrollCommentsLoading] = useState(false);
-
+  const [addCommentVisible, setAddCommentVisible] = useState(false);
   const [pageQuery, setPageQuery] = useState(1);
   const [totalComments, setTotalComments] = useState(0);
   const [totalCommentsDisplayed, setTotalCommentsDisplayed] = useState(0);
   const [userReachedEnd, setUserReachedEnd] = useState(false);
+  const [newCommentsAdded, setNewCommentsAdded] = useState(0);
+
+  const handlePostCommentButton = () => {
+    setAddCommentVisible((previousState) => {
+      return !previousState;
+    });
+  };
+
+  // const resetComments = () => {
+  //   setAllComments([]);
+  //   setCommentsLoading(true);
+  //   setTotalComments(0);
+  //   setTotalCommentsDisplayed(0);
+  //   if (pageQuery === 1) {
+  //     setRefreshCount((previousValue) => {
+  //       return previousValue + 1;
+  //     });
+  //   } else {
+  //     setPageQuery(1);
+  //   }
+  // };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -56,6 +79,7 @@ function Comments({ articleId }) {
   ]);
 
   useEffect(() => {
+    console.log('useeffect triggered');
     if (pageQuery === 1) {
       setCommentsLoading(true);
     } else {
@@ -69,14 +93,21 @@ function Comments({ articleId }) {
         });
 
         setAllComments((previousComments) => {
-          return [...previousComments, ...comments.comments];
+          if (newCommentsAdded > 9) {
+            setNewCommentsAdded((previousTotal) => {
+              return previousTotal - 10;
+            });
+            return [...previousComments];
+          } else {
+            const newComments = comments.comments.slice(newCommentsAdded);
+            return [...previousComments, ...newComments];
+          }
         });
 
         setTotalCommentsDisplayed((previousNumber) => {
           return previousNumber + comments.comments.length;
         });
 
-        console.log('comments loading in comments');
         setCommentsLoading(false);
         setScrollCommentsLoading(false);
         setUserReachedEnd(false);
@@ -92,6 +123,22 @@ function Comments({ articleId }) {
     <div className={`Comments`}>
       <Loading isLoading={commentsLoading} loadingText='Loading Comments'>
         <h2 className='comments-title'>Comments</h2>
+        <button
+          className='comments-new-comment-button'
+          onClick={(e) => {
+            handlePostCommentButton();
+          }}
+        >
+          Post a Comment
+        </button>
+        <Collapsable isVisible={addCommentVisible}>
+          <NewComment
+            setAddCommentVisible={setAddCommentVisible}
+            articleId={articleId}
+            setNewCommentsAdded={setNewCommentsAdded}
+            setAllComments={setAllComments}
+          ></NewComment>
+        </Collapsable>
         <div className='comments-container'>
           {allComments.map((comment) => {
             return <CommentCard comment={comment}></CommentCard>;
