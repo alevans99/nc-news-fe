@@ -11,7 +11,7 @@ function Article() {
   const [currentArticle, setCurrentArticle] = useState({});
   const [articleLoading, setArticleLoading] = useState(true);
   const [commentsLoading, setCommentsLoading] = useState(true);
-  const [articleError, setArticleError] = useState(true);
+  const [articleError, setArticleError] = useState(false);
   const { article_id } = useParams();
 
   useEffect(() => {
