@@ -8,6 +8,7 @@ import Articles from './components/Articles';
 import Article from './components/Article';
 import NewArticle from './components/NewArticle';
 import UserProfile from './components/UserProfile';
+import ErrorMessage from './components/ErrorMessage';
 
 function App() {
   const [allTopics, setAllTopics] = useState([]);
@@ -70,6 +71,18 @@ function App() {
               path='/users/:username'
               element={<UserProfile></UserProfile>}
             ></Route>
+            <Route
+              path='/error'
+              element={
+                <ErrorMessage
+                  isVisible={true}
+                  errorText={
+                    "That page doesn't exist! Click on the title to go back to the homepage."
+                  }
+                ></ErrorMessage>
+              }
+            ></Route>
+            <Route path='/*' element={<Navigate replace to='/error' />}></Route>
           </Routes>
         </div>
       </UserContext.Provider>

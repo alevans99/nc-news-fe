@@ -142,6 +142,7 @@ function UserProfile({}) {
           <img
             className='user-profile-image'
             src={userProfileInformation.avatar_url}
+            alt='user-profile-avatar'
           ></img>
         </div>
       </div>

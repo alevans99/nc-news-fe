@@ -1,5 +1,4 @@
 import './styles/CommentCard.css';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import incArrow from '../images/up-arrow.png';
 import decArrow from '../images/down-arrow.png';
