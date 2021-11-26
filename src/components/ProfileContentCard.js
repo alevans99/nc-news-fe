@@ -11,6 +11,8 @@ function ProfileContentCard({ content }) {
   return (
     <div className={`ProfileContentCard`}>
       <div className='profile-card-vote-container'>
+        <h4 className='profile-card-vote-title'>{`Votes`}</h4>
+
         <h3 className='profile-card-vote-count'>{`${votes}`}</h3>
       </div>
       <Link className='profile-card-link' to={`${link}`}>

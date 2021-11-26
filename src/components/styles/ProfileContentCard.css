@@ -14,6 +14,7 @@
   box-sizing: border-box;
   justify-content: center;
   border: 1px #252a34 solid;
+  margin-bottom: 20px;
 }
 
 .profile-card-vote-container {
@@ -30,10 +31,20 @@
   font-size: 2rem;
 }
 
+.profile-card-link {
+  text-decoration: none;
+  color: #252a34;
+}
+
 .profile-card-text {
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 700;
   grid-area: card-body;
+}
+
+.profile-card-text:hover {
+  color: #ff2e63;
+  cursor: pointer;
 }
 
 .profile-card-author {

@@ -3,6 +3,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import {
   getArticles,
+  getArticlesByUsername,
   getCommentsByUsername,
   postNewComment,
 } from '../utils/api';
@@ -27,6 +28,7 @@ function UserProfile({}) {
   const [cardsLoading, setCardsLoading] = useState(true);
   const [pageQuery, setPageQuery] = useState(1);
 
+  console.log(currentUser.avatar_url, 'url');
   useEffect(() => {
     setCardsLoading(true);
     if (displayChoice === 'Comments') {
@@ -44,8 +46,6 @@ function UserProfile({}) {
           });
           setUserContent(contentObjects);
           setUserContentTotal(comments.total_count);
-          console.log('got user comments', comments.comments);
-          console.log('got user comments total', comments.total_count);
 
           setCardsLoading(false);
         })
@@ -54,56 +54,70 @@ function UserProfile({}) {
           setCardsLoading(false);
         });
     } else {
-      console.log('Articles requested');
+      getArticlesByUsername(currentUser.username, pageQuery)
+        .then((articles) => {
+          const contentObjects = articles.articles.map((article) => {
+            return {
+              id: article.article_id,
+              author: article.author,
+              text: article.title,
+              votes: article.votes,
+              date: article.created_at,
+              link: `/articles/${article.article_id}`,
+            };
+          });
+          setUserContent(contentObjects);
+          setUserContentTotal(articles.total_count);
+
+          setCardsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setCardsLoading(false);
+        });
     }
   }, [displayChoice]);
 
-  const displaySelectedCards = () => {
-    if (displayChoice === 'Comments') {
-      return userComments.map((comment) => {
-        <CommentCard comment={comment}></CommentCard>;
-      });
-    } else {
-      return userArticles.map((article) => {
-        <ArticleCard article={article}></ArticleCard>;
-      });
-    }
-  };
-
   return (
     <div className={`UserProfile`}>
-      <div className='user-profile-user-details-container'>
-        <h2 className='user-profile-username-title'>{currentUser.username}</h2>
-        <div className='user-profile-votes-container'>
-          <h3 className='user-profile-user-comment-votes'>
-            {userCommentVotes}
-          </h3>
-          <h3 className='user-profile-user-article-votes'>
-            {userArticleVotes}
-          </h3>
-        </div>
-        <select
-          value={displayChoice}
-          className='user-profile-display-select'
-          onChange={(e) => {
-            setDisplayChoice(e.target.value);
-          }}
-        >
-          <option value='Comments'>Comments</option>
-          <option value='Articles'>Articles</option>
-        </select>
-        <Loading isLoading={cardsLoading}>
-          <div className='user-profile-cards-body'>
-            <div className='user-profile-cards-container'>
-              {userContent.map((content) => {
-                return (
-                  <ProfileContentCard content={content}></ProfileContentCard>
-                );
-              })}
-            </div>
+      <div className='user-profile-user-details-body'>
+        <div className='user-profile-user-details-container'>
+          <h2 className='user-profile-username-title'>
+            {currentUser.username}
+          </h2>
+          <img className='user-profile-image'></img>
+          <div className='user-profile-votes-container'>
+            <h3 className='user-profile-user-comment-votes'>
+              {userCommentVotes}
+            </h3>
+            <h3 className='user-profile-user-article-votes'>
+              {userArticleVotes}
+            </h3>
           </div>
-        </Loading>
+        </div>
       </div>
+
+      <select
+        value={displayChoice}
+        className='user-profile-display-select'
+        onChange={(e) => {
+          setDisplayChoice(e.target.value);
+        }}
+      >
+        <option value='Comments'>Comments</option>
+        <option value='Articles'>Articles</option>
+      </select>
+      <Loading isLoading={cardsLoading}>
+        <div className='user-profile-cards-body'>
+          <div className='user-profile-cards-container'>
+            {userContent.map((content) => {
+              return (
+                <ProfileContentCard content={content}></ProfileContentCard>
+              );
+            })}
+          </div>
+        </div>
+      </Loading>
     </div>
   );
 }

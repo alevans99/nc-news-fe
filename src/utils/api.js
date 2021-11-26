@@ -32,6 +32,19 @@ export const getArticles = async (topic, sortQuery, pageQuery) => {
   return articleObject;
 };
 
+export const getArticlesByUsername = async (username, pageQuery) => {
+  let optionalQueries = {};
+
+  optionalQueries['p'] = pageQuery;
+
+  const result = await newsApi.get(`/users/${username}/articles`, {
+    params: optionalQueries,
+  });
+
+  const articlesObject = result.data;
+  return articlesObject;
+};
+
 export const getArticleById = async (articleId) => {
   const result = await newsApi.get(`/articles/${articleId}`);
   const articleObject = result.data.article;
