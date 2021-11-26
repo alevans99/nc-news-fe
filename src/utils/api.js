@@ -61,10 +61,23 @@ export const postNewArticle = async (author, title, body, topic) => {
 
 export const getComments = async (articleId, pageQuery) => {
   let optionalQueries = {};
-  console.log('getting comments');
+
   optionalQueries['p'] = pageQuery;
-  console.log('comments extra queries', optionalQueries);
+
   const result = await newsApi.get(`/articles/${articleId}/comments`, {
+    params: optionalQueries,
+  });
+
+  const commentsObject = result.data;
+  return commentsObject;
+};
+
+export const getCommentsByUsername = async (username, pageQuery) => {
+  let optionalQueries = {};
+
+  optionalQueries['p'] = pageQuery;
+
+  const result = await newsApi.get(`/users/${username}/comments`, {
     params: optionalQueries,
   });
 
