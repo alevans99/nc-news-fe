@@ -7,6 +7,7 @@ import { getTopics } from './utils/api';
 import Articles from './components/Articles';
 import Article from './components/Article';
 import NewArticle from './components/NewArticle';
+import UserProfile from './components/UserProfile';
 
 function App() {
   const [allTopics, setAllTopics] = useState([]);
@@ -62,6 +63,11 @@ function App() {
                   setCurrentTopic={setCurrentTopic}
                 ></Articles>
               }
+            ></Route>
+
+            <Route
+              path='/users/:username'
+              element={<UserProfile></UserProfile>}
             ></Route>
           </Routes>
         </div>
