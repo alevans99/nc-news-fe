@@ -83,7 +83,7 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
                   htmlFor='new-article-topic-select'
                   className='new-article-topic-select-label'
                 >
-                  Category
+                  Topic
                 </label>
                 <button
                   className='new-article-new-topic-button'

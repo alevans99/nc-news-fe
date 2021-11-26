@@ -232,4 +232,8 @@
     padding: 6px;
     width: 200px;
   }
+
+  .new-article-topic-title-container {
+    justify-content: center;
+  }
 }

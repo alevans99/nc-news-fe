@@ -111,4 +111,8 @@
     justify-content: center;
     border: 1px #252a34 solid;
   }
+
+  .article-card-author {
+    margin: 20px 0;
+  }
 }
