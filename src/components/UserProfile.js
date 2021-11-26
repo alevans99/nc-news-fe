@@ -11,11 +11,14 @@ import { UserContext } from '../contexts/UserContext';
 import CommentCard from './CommentCard';
 import Loading from './Loading';
 import ArticleCard from './ArticleCard';
+import ProfileContentCard from './ProfileContentCard';
 
 function UserProfile({}) {
   const { currentUser } = useContext(UserContext);
   const [userCommentVotes, setUserCommentVotes] = useState(0);
   const [userArticleVotes, setUserArticleVotes] = useState(0);
+  const [userContent, setUserContent] = useState([]);
+  const [userContentTotal, setUserContentTotal] = useState(0);
   const [userArticles, setUserArticles] = useState([]);
   const [userArticlesTotal, setUserArticlesTotal] = useState(0);
   const [userComments, setUserComments] = useState([]);
@@ -29,8 +32,18 @@ function UserProfile({}) {
     if (displayChoice === 'Comments') {
       getCommentsByUsername(currentUser.username, pageQuery)
         .then((comments) => {
-          setUserComments(comments.comments);
-          setUserCommentsTotal(comments.total_count);
+          const contentObjects = comments.comments.map((comment) => {
+            return {
+              id: comment.comment_id,
+              author: comment.author,
+              text: comment.body,
+              votes: comment.votes,
+              date: comment.created_at,
+              link: `/articles/${comment.article_id}`,
+            };
+          });
+          setUserContent(contentObjects);
+          setUserContentTotal(comments.total_count);
           console.log('got user comments', comments.comments);
           console.log('got user comments total', comments.total_count);
 
@@ -82,23 +95,11 @@ function UserProfile({}) {
         <Loading isLoading={cardsLoading}>
           <div className='user-profile-cards-body'>
             <div className='user-profile-cards-container'>
-              {displayChoice === 'Comments'
-                ? userComments.map((comment) => {
-                    return (
-                      <CommentCard
-                        key={comment.comment_id}
-                        comment={comment}
-                      ></CommentCard>
-                    );
-                  })
-                : userArticles.map((article) => {
-                    return (
-                      <ArticleCard
-                        key={article.article_id}
-                        article={article}
-                      ></ArticleCard>
-                    );
-                  })}
+              {userContent.map((content) => {
+                return (
+                  <ProfileContentCard content={content}></ProfileContentCard>
+                );
+              })}
             </div>
           </div>
         </Loading>
