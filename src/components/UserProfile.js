@@ -2,6 +2,7 @@ import './styles/UserProfile.css';
 import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import {
+  deleteComment,
   getArticles,
   getArticlesByUsername,
   getCommentsByUsername,
@@ -27,10 +28,39 @@ function UserProfile({}) {
   const [displayChoice, setDisplayChoice] = useState('Comments');
   const [cardsLoading, setCardsLoading] = useState(true);
   const [pageQuery, setPageQuery] = useState(1);
+  const [cardsRemoved, setCardsRemoved] = useState(0);
+
+  //   setNewCommentsAdded((previousTotal) => {
+  //     return previousTotal + 1;
+  //   });
+  //   setAllComments((previousComments) => {
+  //     return [comment, ...previousComments];
+  //   });
+  // })
 
   const { username } = useParams();
 
-  const handleDelete = (id) => {};
+  const handleDelete = (id) => {
+    if (displayChoice === 'Comments') {
+      deleteComment(id)
+        .then((result) => {
+          setCardsRemoved((previousState) => {
+            return previousState + 1;
+          });
+
+          setUserContent((previousContent) => {
+            const filteredContent = previousContent.filter((item) => {
+              return Number(item.id) !== Number(id);
+            });
+            console.log(filteredContent);
+            return filteredContent;
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   useEffect(() => {
     setCardsLoading(true);
@@ -121,6 +151,9 @@ function UserProfile({}) {
                   <button
                     className='user-profile-card-delete-button'
                     value={content.id}
+                    onClick={(e) => {
+                      handleDelete(e.target.value);
+                    }}
                   >
                     Delete
                   </button>

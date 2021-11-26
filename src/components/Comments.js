@@ -26,20 +26,6 @@ function Comments({ articleId }) {
     });
   };
 
-  // const resetComments = () => {
-  //   setAllComments([]);
-  //   setCommentsLoading(true);
-  //   setTotalComments(0);
-  //   setTotalCommentsDisplayed(0);
-  //   if (pageQuery === 1) {
-  //     setRefreshCount((previousValue) => {
-  //       return previousValue + 1;
-  //     });
-  //   } else {
-  //     setPageQuery(1);
-  //   }
-  // };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -79,7 +65,6 @@ function Comments({ articleId }) {
   ]);
 
   useEffect(() => {
-    console.log('useeffect triggered');
     if (pageQuery === 1) {
       setCommentsLoading(true);
     } else {

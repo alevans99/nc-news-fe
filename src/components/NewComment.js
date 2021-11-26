@@ -17,7 +17,6 @@ function NewComment({
   const submitNewComment = () => {
     postNewComment(articleId, currentUser.username, commentInput)
       .then((comment) => {
-        console.log(comment, 'posted');
         setNewCommentsAdded((previousTotal) => {
           return previousTotal + 1;
         });
