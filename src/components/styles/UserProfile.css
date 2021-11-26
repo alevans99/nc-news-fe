@@ -9,25 +9,25 @@
   align-self: center;
 }
 .user-profile-user-details-container {
+  margin: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(1fr, 3);
-  grid-template-areas:
-    'user-name user-name user-image'
-    'user-votes user-votes user-image'
-    'user-votes user-votes user-image';
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .user-profile-username-title {
-  grid-area: user-name;
+  font-size: 3rem;
 }
 
 .user-profile-image {
-  grid-area: user-image;
+  background-color: #ff2e63;
+  height: 300px;
+  width: 300px;
 }
 
 .user-profile-votes-container {
-  grid-area: user-votes;
 }
 
 .user-profile-user-comment-votes {

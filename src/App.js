@@ -11,6 +11,7 @@ import UserProfile from './components/UserProfile';
 
 function App() {
   const [allTopics, setAllTopics] = useState([]);
+
   const [currentUser, setCurrentUser] = useState({ username: 'jessjelly' });
   const [currentTopic, setCurrentTopic] = useState('all');
 

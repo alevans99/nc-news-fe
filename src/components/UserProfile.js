@@ -2,10 +2,12 @@ import './styles/UserProfile.css';
 import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import {
+  deleteArticle,
   deleteComment,
   getArticles,
   getArticlesByUsername,
   getCommentsByUsername,
+  getUserByUsername,
   postNewComment,
 } from '../utils/api';
 import Collapsable from './Collapsable';
@@ -17,6 +19,7 @@ import ProfileContentCard from './ProfileContentCard';
 
 function UserProfile({}) {
   const { currentUser } = useContext(UserContext);
+  const [userProfileInformation, setUserProfileInformation] = useState({});
   const [userCommentVotes, setUserCommentVotes] = useState(0);
   const [userArticleVotes, setUserArticleVotes] = useState(0);
   const [userContent, setUserContent] = useState([]);
@@ -29,14 +32,6 @@ function UserProfile({}) {
   const [cardsLoading, setCardsLoading] = useState(true);
   const [pageQuery, setPageQuery] = useState(1);
   const [cardsRemoved, setCardsRemoved] = useState(0);
-
-  //   setNewCommentsAdded((previousTotal) => {
-  //     return previousTotal + 1;
-  //   });
-  //   setAllComments((previousComments) => {
-  //     return [comment, ...previousComments];
-  //   });
-  // })
 
   const { username } = useParams();
 
@@ -52,7 +47,25 @@ function UserProfile({}) {
             const filteredContent = previousContent.filter((item) => {
               return Number(item.id) !== Number(id);
             });
-            console.log(filteredContent);
+
+            return filteredContent;
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      deleteArticle(id)
+        .then((result) => {
+          setCardsRemoved((previousState) => {
+            return previousState + 1;
+          });
+
+          setUserContent((previousContent) => {
+            const filteredContent = previousContent.filter((item) => {
+              return Number(item.id) !== Number(id);
+            });
+
             return filteredContent;
           });
         })
@@ -61,6 +74,16 @@ function UserProfile({}) {
         });
     }
   };
+
+  useEffect(() => {
+    getUserByUsername(username)
+      .then((result) => {
+        setUserProfileInformation(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [username]);
 
   useEffect(() => {
     setCardsLoading(true);
@@ -116,15 +139,10 @@ function UserProfile({}) {
       <div className='user-profile-user-details-body'>
         <div className='user-profile-user-details-container'>
           <h2 className='user-profile-username-title'>{username}</h2>
-          <img className='user-profile-image'></img>
-          <div className='user-profile-votes-container'>
-            <h3 className='user-profile-user-comment-votes'>
-              {userCommentVotes}
-            </h3>
-            <h3 className='user-profile-user-article-votes'>
-              {userArticleVotes}
-            </h3>
-          </div>
+          <img
+            className='user-profile-image'
+            src={userProfileInformation.avatar_url}
+          ></img>
         </div>
       </div>
 

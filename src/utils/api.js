@@ -72,6 +72,12 @@ export const postNewArticle = async (author, title, body, topic) => {
   return articleObject;
 };
 
+export const deleteArticle = async (articleId) => {
+  const result = await newsApi.delete(`/articles/${articleId}`);
+  const deletedArticle = result.data;
+  return deletedArticle;
+};
+
 export const getComments = async (articleId, pageQuery) => {
   let optionalQueries = {};
 
@@ -115,8 +121,14 @@ export const postNewComment = async (articleId, username, body) => {
   return postedComment;
 };
 
-export const deleteComment = async (commendId) => {
-  const result = await newsApi.delete(`/comments/${commendId}`);
+export const deleteComment = async (commentId) => {
+  const result = await newsApi.delete(`/comments/${commentId}`);
   const deletedComment = result.data;
   return deletedComment;
+};
+
+export const getUserByUsername = async (username) => {
+  const result = await newsApi.get(`/users/${username}`);
+  const user = result.data.user;
+  return user;
 };
