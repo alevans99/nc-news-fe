@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import loadingSpinner from '../images/spinner.png';
-
 import { getComments } from '../utils/api';
 import './styles/Comments.css';
 import CommentCard from './CommentCard';

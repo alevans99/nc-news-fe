@@ -11,6 +11,7 @@ import {
 import { UserContext } from '../contexts/UserContext';
 import Loading from './Loading';
 import ProfileContentCard from './ProfileContentCard';
+import ErrorMessage from './ErrorMessage';
 
 function UserProfile({}) {
   const { currentUser } = useContext(UserContext);
@@ -21,6 +22,10 @@ function UserProfile({}) {
   const [cardsLoading, setCardsLoading] = useState(true);
   const [pageQuery, setPageQuery] = useState(1);
   const [cardsRemoved, setCardsRemoved] = useState(0);
+  const [profileError, setProfileError] = useState(false);
+  const [profileErrorText, setProfileErrorText] = useState(
+    'There was an unexpected error'
+  );
 
   const { username } = useParams();
 
@@ -41,7 +46,10 @@ function UserProfile({}) {
           });
         })
         .catch((err) => {
-          console.log(err);
+          setProfileErrorText(
+            'There was an error when trying to delete your comment, please reload the page to try again.'
+          );
+          setProfileError(true);
         });
     } else {
       deleteArticle(id)
@@ -59,7 +67,10 @@ function UserProfile({}) {
           });
         })
         .catch((err) => {
-          console.log(err);
+          setProfileErrorText(
+            'There was an error when trying to delete your article, please reload the page to try again.'
+          );
+          setProfileError(true);
         });
     }
   };
@@ -70,7 +81,8 @@ function UserProfile({}) {
         setUserProfileInformation(result);
       })
       .catch((err) => {
-        console.log(err);
+        setProfileErrorText("We couldn't find the user you requested");
+        setProfileError(true);
       });
   }, [username]);
 
@@ -121,61 +133,63 @@ function UserProfile({}) {
           setCardsLoading(false);
         });
     }
-  }, [displayChoice]);
+  }, [displayChoice, username]);
 
   return (
     <div className={`UserProfile`}>
-      <div className='user-profile-user-details-body'>
-        <div className='user-profile-user-details-container'>
-          <h2 className='user-profile-username-title'>{username}</h2>
-          <img
-            className='user-profile-image'
-            src={userProfileInformation.avatar_url}
-            alt='user-profile-avatar'
-          ></img>
-        </div>
-      </div>
-
-      <select
-        value={displayChoice}
-        className='user-profile-display-select'
-        onChange={(e) => {
-          setDisplayChoice(e.target.value);
-        }}
-      >
-        <option value='Comments'>Comments</option>
-        <option value='Articles'>Articles</option>
-      </select>
-      <Loading isLoading={cardsLoading}>
-        <div className='user-profile-cards-body'>
-          <div className='user-profile-cards-container'>
-            {userContent.map((content) => {
-              return username === currentUser.username ? (
-                <div
-                  key={content.id}
-                  className='user-profile-individual-card-container'
-                >
-                  <ProfileContentCard content={content}></ProfileContentCard>
-                  <button
-                    className='user-profile-card-delete-button'
-                    value={content.id}
-                    onClick={(e) => {
-                      handleDelete(e.target.value);
-                    }}
-                  >
-                    Delete
-                  </button>
-                </div>
-              ) : (
-                <ProfileContentCard
-                  key={content.id}
-                  content={content}
-                ></ProfileContentCard>
-              );
-            })}
+      <ErrorMessage isVisible={profileError} errorText={profileErrorText}>
+        <div className='user-profile-user-details-body'>
+          <div className='user-profile-user-details-container'>
+            <h2 className='user-profile-username-title'>{username}</h2>
+            <img
+              className='user-profile-image'
+              src={userProfileInformation.avatar_url}
+              alt='user-profile-avatar'
+            ></img>
           </div>
         </div>
-      </Loading>
+
+        <select
+          value={displayChoice}
+          className='user-profile-display-select'
+          onChange={(e) => {
+            setDisplayChoice(e.target.value);
+          }}
+        >
+          <option value='Comments'>Comments</option>
+          <option value='Articles'>Articles</option>
+        </select>
+        <Loading isLoading={cardsLoading}>
+          <div className='user-profile-cards-body'>
+            <div className='user-profile-cards-container'>
+              {userContent.map((content) => {
+                return username === currentUser.username ? (
+                  <div
+                    key={content.id}
+                    className='user-profile-individual-card-container'
+                  >
+                    <ProfileContentCard content={content}></ProfileContentCard>
+                    <button
+                      className='user-profile-card-delete-button'
+                      value={content.id}
+                      onClick={(e) => {
+                        handleDelete(e.target.value);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ) : (
+                  <ProfileContentCard
+                    key={content.id}
+                    content={content}
+                  ></ProfileContentCard>
+                );
+              })}
+            </div>
+          </div>
+        </Loading>
+      </ErrorMessage>
     </div>
   );
 }

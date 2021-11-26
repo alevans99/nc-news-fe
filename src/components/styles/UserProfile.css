@@ -5,8 +5,8 @@
   gap: 20px;
 }
 .user-profile-user-details-body {
-  width: 80%;
-  align-self: center;
+  display: flex;
+  justify-content: center;
 }
 .user-profile-user-details-container {
   margin: 20px;
@@ -19,12 +19,14 @@
 
 .user-profile-username-title {
   font-size: 3rem;
+  padding: 20px;
 }
 
 .user-profile-image {
   background-color: #ff2e63;
   height: 300px;
   width: 300px;
+  border-radius: 6px;
 }
 
 .user-profile-votes-container {
@@ -40,6 +42,7 @@
   width: 300px;
   height: 40px;
   align-self: center;
+  margin: 20px;
 }
 
 .user-profile-cards-body {
@@ -83,4 +86,10 @@
   color: #eaeaea;
 
   border: #eaeaea 1px solid;
+}
+
+@media (max-width: 740px) {
+  .user-profile-username-title {
+    margin: 20px 0;
+  }
 }

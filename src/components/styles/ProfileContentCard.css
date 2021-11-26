@@ -34,12 +34,12 @@
 .profile-card-link {
   text-decoration: none;
   color: #252a34;
+  grid-area: card-body;
 }
 
 .profile-card-text {
   font-size: 1.4rem;
-  font-weight: 700;
-  grid-area: card-body;
+  font-weight: 400;
 }
 
 .profile-card-text:hover {
@@ -51,4 +51,14 @@
   grid-area: card-author;
   justify-self: end;
   align-self: flex-end;
+}
+
+@media (max-width: 740px) {
+  .profile-card-author {
+    margin-top: 20px;
+  }
+
+  .profile-card-text {
+    font-size: 1.2rem;
+  }
 }
