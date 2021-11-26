@@ -24,6 +24,11 @@
   text-decoration: none;
   text-align: center;
 }
+.nav-title:hover {
+  color: #08d9d6;
+  font-family: 'Raleway', sans-serif;
+  cursor: pointer;
+}
 .nav-topic-container {
   display: flex;
   grid-area: topic;
