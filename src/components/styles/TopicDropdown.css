@@ -28,3 +28,12 @@
   background-color: #ff7094;
   color: #eaeaea;
 }
+
+@media (max-width: 740px) {
+  .topic-dropdown-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 40vh;
+    overflow-x: hidden;
+  }
+}

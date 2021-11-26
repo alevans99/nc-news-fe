@@ -72,7 +72,11 @@
 }
 
 .comment-card-author {
+  margin-top: 20px;
   grid-area: card-author;
   justify-self: end;
   align-self: flex-end;
+}
+
+@media (max-width: 740px) {
 }

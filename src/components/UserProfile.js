@@ -1,33 +1,22 @@
 import './styles/UserProfile.css';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import {
   deleteArticle,
   deleteComment,
-  getArticles,
   getArticlesByUsername,
   getCommentsByUsername,
   getUserByUsername,
-  postNewComment,
 } from '../utils/api';
-import Collapsable from './Collapsable';
 import { UserContext } from '../contexts/UserContext';
-import CommentCard from './CommentCard';
 import Loading from './Loading';
-import ArticleCard from './ArticleCard';
 import ProfileContentCard from './ProfileContentCard';
 
 function UserProfile({}) {
   const { currentUser } = useContext(UserContext);
   const [userProfileInformation, setUserProfileInformation] = useState({});
-  const [userCommentVotes, setUserCommentVotes] = useState(0);
-  const [userArticleVotes, setUserArticleVotes] = useState(0);
   const [userContent, setUserContent] = useState([]);
   const [userContentTotal, setUserContentTotal] = useState(0);
-  const [userArticles, setUserArticles] = useState([]);
-  const [userArticlesTotal, setUserArticlesTotal] = useState(0);
-  const [userComments, setUserComments] = useState([]);
-  const [userCommentsTotal, setUserCommentsTotal] = useState(0);
   const [displayChoice, setDisplayChoice] = useState('Comments');
   const [cardsLoading, setCardsLoading] = useState(true);
   const [pageQuery, setPageQuery] = useState(1);

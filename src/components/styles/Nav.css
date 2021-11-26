@@ -2,25 +2,26 @@
   background-color: #ff2e63;
   color: #eaeaea;
   font-family: 'Raleway', sans-serif;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: min-content;
-  grid-template-areas: 'profile-container title topic';
   padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: min-content;
+  align-items: center;
+  justify-items: center;
 }
 
 .nav-title-link {
-  grid-area: title;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
   text-decoration: none;
   color: #eaeaea;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  margin: 10px;
 }
 
 .nav-title {
   font-size: 4rem;
-  line-height: 1;
+
   text-decoration: none;
   text-align: center;
 }
@@ -31,10 +32,11 @@
 }
 .nav-topic-container {
   display: flex;
-  grid-area: topic;
+
   align-self: end;
   justify-self: center;
   justify-content: center;
+  margin: 10px;
 }
 
 .nav-topic {
@@ -52,10 +54,11 @@
 }
 
 .nav-profile-container {
-  grid-area: profile-container;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 10px;
+  text-align: center;
 }
 
 .nav-user {
@@ -85,4 +88,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 740px) {
+  .Nav {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content, min-content;
+  }
+  .nav-title-link {
+    grid-area: 1 / 1 / 2 / 3;
+    order: 1;
+  }
+  .nav-topic-container {
+    order: 2;
+  }
+  .nav-profile-container {
+    order: 3;
+  }
+
+  .nav-user-profile-link {
+    width: 160px;
+    height: 40px;
+  }
 }

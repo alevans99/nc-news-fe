@@ -5,7 +5,7 @@ import { getComments } from '../utils/api';
 import './styles/Comments.css';
 import CommentCard from './CommentCard';
 import Loading from './Loading';
-import Collapsable from './Collapsable';
+import CollapsableContainer from './CollapsableContainer';
 import NewComment from './NewComment';
 
 function Comments({ articleId }) {
@@ -115,14 +115,14 @@ function Comments({ articleId }) {
         >
           Post a Comment
         </button>
-        <Collapsable isVisible={addCommentVisible}>
+        <CollapsableContainer isVisible={addCommentVisible}>
           <NewComment
             setAddCommentVisible={setAddCommentVisible}
             articleId={articleId}
             setNewCommentsAdded={setNewCommentsAdded}
             setAllComments={setAllComments}
           ></NewComment>
-        </Collapsable>
+        </CollapsableContainer>
         <div className='comments-container'>
           {allComments.map((comment) => {
             return (

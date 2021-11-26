@@ -41,3 +41,12 @@
   width: 80%;
   justify-self: center;
 }
+
+@media (max-width: 740px) {
+  .article-detail-title {
+    text-align: center;
+  }
+  .article-detail-text {
+    font-size: 1.3rem;
+  }
+}

@@ -1,8 +1,6 @@
 import './styles/NewComment.css';
-import { useParams, useLocation } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
-import { getArticles, postNewComment } from '../utils/api';
-import Collapsable from './Collapsable';
+import { useState, useContext } from 'react';
+import { postNewComment } from '../utils/api';
 import { UserContext } from '../contexts/UserContext';
 
 function NewComment({

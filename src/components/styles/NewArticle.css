@@ -188,3 +188,48 @@
 
   border: #eaeaea 1px solid;
 }
+
+@media (max-width: 740px) {
+  .NewArticle {
+    text-align: center;
+  }
+
+  .new-article-page-title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .new-article-title-input {
+    font-size: 1rem;
+    height: 40px;
+    padding: 6px;
+    width: 200px;
+  }
+  .new-article-fieldset {
+    align-items: center;
+  }
+
+  .new-topic-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border: 1px #252a34 solid;
+    border-radius: 6px;
+    align-items: center;
+  }
+
+  .new-topic-input {
+    font-size: 1rem;
+    height: 40px;
+    padding: 6px;
+    width: 200px;
+  }
+
+  .new-topic-description-input {
+    font-size: 1rem;
+    height: 40px;
+    padding: 6px;
+    width: 200px;
+  }
+}

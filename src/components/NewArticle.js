@@ -1,7 +1,7 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { postNewArticle, postNewTopic } from '../utils/api';
 import { capitaliseString } from '../utils/utils';
-import Collapsable from './Collapsable';
+import CollapsableContainer from './CollapsableContainer';
 import './styles/NewArticle.css';
 import { UserContext } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -97,7 +97,7 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
                   Add New
                 </button>
               </div>
-              <Collapsable isVisible={newTopicVisible}>
+              <CollapsableContainer isVisible={newTopicVisible}>
                 <div className='new-topic-container'>
                   <div
                     className='new-topic-entry'
@@ -145,7 +145,7 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
                     </button>
                   </div>
                 </div>
-              </Collapsable>
+              </CollapsableContainer>
               <select
                 className='new-article-topic-select'
                 value={topic}

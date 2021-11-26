@@ -13,7 +13,7 @@ const ErrorMessage = ({
           <img
             className='error-image'
             src={loadingSpinner}
-            alt='Error Image of website logo'
+            alt='website logo'
           ></img>
           <h2 className='error-text'>{errorText}</h2>
         </div>

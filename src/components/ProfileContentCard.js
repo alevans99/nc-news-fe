@@ -1,13 +1,9 @@
 import './styles/ProfileContentCard.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import incArrow from '../images/up-arrow.png';
-import decArrow from '../images/down-arrow.png';
-import { patchCommentVotes } from '../utils/api';
 import { dateFormatter } from '../utils/utils';
 
 function ProfileContentCard({ content }) {
-  const { id, votes, text, link, date, author } = content;
+  const { votes, text, link, date, author } = content;
   return (
     <div className={`ProfileContentCard`}>
       <div className='profile-card-vote-container'>

@@ -91,3 +91,24 @@
   justify-self: end;
   align-self: flex-end;
 }
+
+@media (max-width: 740px) {
+  .article-card-title {
+    font-size: 1.5rem;
+  }
+
+  .ArticleCard {
+    grid-template-columns: min-content 1fr;
+
+    grid-template-rows: min-content min-content min-content;
+    grid-template-areas:
+      'card-vote card-title'
+      'card-vote card-author'
+      'card-vote card-comments';
+    padding: 30px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    justify-content: center;
+    border: 1px #252a34 solid;
+  }
+}

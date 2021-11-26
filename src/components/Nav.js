@@ -38,6 +38,15 @@ function Nav({ currentTopic, setCurrentTopic, allTopics }) {
 
   return (
     <div className={`Nav`}>
+      <div className='nav-profile-container'>
+        <h3 className='nav-user'>{`Logged in as ${currentUser.username}`}</h3>
+        <Link
+          className='nav-user-profile-link'
+          to={`/users/${currentUser.username}`}
+        >
+          <h3 className='nav-user-profile-text'>{`Visit Profile`}</h3>
+        </Link>
+      </div>
       <Link className={'nav-title-link'} to={`/topics/all/articles`}>
         <h1 className='nav-title'>NC News</h1>
       </Link>
@@ -59,16 +68,6 @@ function Nav({ currentTopic, setCurrentTopic, allTopics }) {
           setCurrentTopic={setCurrentTopic}
           allTopics={allTopics}
         ></TopicDropdown>
-      </div>
-
-      <div className='nav-profile-container'>
-        <h3 className='nav-user'>{`Logged in as ${currentUser.username}`}</h3>
-        <Link
-          className='nav-user-profile-link'
-          to={`/users/${currentUser.username}`}
-        >
-          <h3 className='nav-user-profile-text'>{`Visit Profile`}</h3>
-        </Link>
       </div>
     </div>
   );
