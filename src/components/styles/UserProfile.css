@@ -51,3 +51,36 @@
 .user-profile-cards-container {
   width: 80%;
 }
+
+.user-profile-individual-card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-card-delete-button {
+  font-size: 1rem;
+  height: 40px;
+  width: 120px;
+  border-radius: 6px;
+  align-self: flex-end;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  border: #eaeaea 1px solid;
+  color: #eaeaea;
+  background-color: #ff2e63;
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+
+.user-profile-card-delete-button :hover {
+  background-color: #fff;
+  color: #ff2e63;
+  border: #ff2e63 1px solid;
+}
+
+.user-profile-card-delete-button :active {
+  background-color: #ffa8be;
+  color: #eaeaea;
+
+  border: #eaeaea 1px solid;
+}

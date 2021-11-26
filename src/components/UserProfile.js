@@ -28,11 +28,14 @@ function UserProfile({}) {
   const [cardsLoading, setCardsLoading] = useState(true);
   const [pageQuery, setPageQuery] = useState(1);
 
-  console.log(currentUser.avatar_url, 'url');
+  const { username } = useParams();
+
+  const handleDelete = (id) => {};
+
   useEffect(() => {
     setCardsLoading(true);
     if (displayChoice === 'Comments') {
-      getCommentsByUsername(currentUser.username, pageQuery)
+      getCommentsByUsername(username, pageQuery)
         .then((comments) => {
           const contentObjects = comments.comments.map((comment) => {
             return {
@@ -54,7 +57,7 @@ function UserProfile({}) {
           setCardsLoading(false);
         });
     } else {
-      getArticlesByUsername(currentUser.username, pageQuery)
+      getArticlesByUsername(username, pageQuery)
         .then((articles) => {
           const contentObjects = articles.articles.map((article) => {
             return {
@@ -82,9 +85,7 @@ function UserProfile({}) {
     <div className={`UserProfile`}>
       <div className='user-profile-user-details-body'>
         <div className='user-profile-user-details-container'>
-          <h2 className='user-profile-username-title'>
-            {currentUser.username}
-          </h2>
+          <h2 className='user-profile-username-title'>{username}</h2>
           <img className='user-profile-image'></img>
           <div className='user-profile-votes-container'>
             <h3 className='user-profile-user-comment-votes'>
@@ -111,8 +112,24 @@ function UserProfile({}) {
         <div className='user-profile-cards-body'>
           <div className='user-profile-cards-container'>
             {userContent.map((content) => {
-              return (
-                <ProfileContentCard content={content}></ProfileContentCard>
+              return username === currentUser.username ? (
+                <div
+                  key={content.id}
+                  className='user-profile-individual-card-container'
+                >
+                  <ProfileContentCard content={content}></ProfileContentCard>
+                  <button
+                    className='user-profile-card-delete-button'
+                    value={content.id}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ) : (
+                <ProfileContentCard
+                  key={content.id}
+                  content={content}
+                ></ProfileContentCard>
               );
             })}
           </div>

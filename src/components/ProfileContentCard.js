@@ -7,7 +7,7 @@ import { patchCommentVotes } from '../utils/api';
 import { dateFormatter } from '../utils/utils';
 
 function ProfileContentCard({ content }) {
-  const { votes, text, link, date, author } = content;
+  const { id, votes, text, link, date, author } = content;
   return (
     <div className={`ProfileContentCard`}>
       <div className='profile-card-vote-container'>
