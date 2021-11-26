@@ -96,7 +96,6 @@ function Comments({ articleId }) {
         setUserReachedEnd(false);
       })
       .catch((err) => {
-        console.log(err);
         setScrollCommentsLoading(false);
         setCommentsLoading(false);
       });

@@ -15,16 +15,13 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({ username: 'jessjelly' });
   const [currentTopic, setCurrentTopic] = useState('all');
-
   //Maintain list of all topics
   useEffect(() => {
     getTopics()
       .then((topics) => {
         setAllTopics(topics);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   return (

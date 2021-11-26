@@ -15,9 +15,7 @@ function ArticleCard({ article }) {
 
     patchArticleVotes(article.article_id, voteChange)
       .then((result) => {})
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   return (

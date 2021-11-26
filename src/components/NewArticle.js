@@ -21,31 +21,31 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
   let navigate = useNavigate();
 
   const addNewArticle = () => {
-    postNewArticle(currentUser.username, articleTitle, articleBody, topic)
+    postNewArticle(
+      currentUser.username,
+      articleTitle,
+      articleBody,
+      topic.toLowerCase()
+    )
       .then((result) => {
-        console.log(result);
-        navigate(`/topics/${topic}/articles`);
+        navigate(`/topics/${topic.toLowerCase()}/articles`);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const addNewTopic = () => {
-    postNewTopic(newTopic, newTopicDescription)
+    postNewTopic(newTopic.toLowerCase(), newTopicDescription)
       .then((result) => {
         setTopic(newTopic);
         setNewTopic('');
         setNewTopicDescription('');
         setNewTopicVisible(false);
-        console.log(result);
+
         setAllTopics((previousTopics) => {
           return [...previousTopics, result];
         });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   return (

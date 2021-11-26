@@ -61,7 +61,6 @@ export const patchArticleVotes = async (articleId, voteChange) => {
 
 export const postNewArticle = async (author, title, body, topic) => {
   console.log(author, title, body, topic);
-
   const result = await newsApi.post(`/articles`, {
     author,
     title,

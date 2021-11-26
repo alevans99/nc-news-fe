@@ -27,9 +27,7 @@ function NewComment({
           return [comment, ...previousComments];
         });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
     setAddCommentVisible(false);
   };
 
@@ -39,7 +37,7 @@ function NewComment({
         className='new-comment-form'
         onSubmit={(e) => {
           e.preventDefault();
-          if (commentInput != '') {
+          if (commentInput !== '') {
             submitNewComment();
             setCommentValidationWarning(false);
           } else {

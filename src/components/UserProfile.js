@@ -13,15 +13,15 @@ import Loading from './Loading';
 import ProfileContentCard from './ProfileContentCard';
 import ErrorMessage from './ErrorMessage';
 
-function UserProfile({}) {
+function UserProfile() {
   const { currentUser } = useContext(UserContext);
   const [userProfileInformation, setUserProfileInformation] = useState({});
   const [userContent, setUserContent] = useState([]);
-  const [userContentTotal, setUserContentTotal] = useState(0);
+  // const [userContentTotal, setUserContentTotal] = useState(0);
   const [displayChoice, setDisplayChoice] = useState('Comments');
   const [cardsLoading, setCardsLoading] = useState(true);
   const [pageQuery, setPageQuery] = useState(1);
-  const [cardsRemoved, setCardsRemoved] = useState(0);
+  // const [cardsRemoved, setCardsRemoved] = useState(0);
   const [profileError, setProfileError] = useState(false);
   const [profileErrorText, setProfileErrorText] = useState(
     'There was an unexpected error'
@@ -33,9 +33,9 @@ function UserProfile({}) {
     if (displayChoice === 'Comments') {
       deleteComment(id)
         .then((result) => {
-          setCardsRemoved((previousState) => {
-            return previousState + 1;
-          });
+          // setCardsRemoved((previousState) => {
+          //   return previousState + 1;
+          // });
 
           setUserContent((previousContent) => {
             const filteredContent = previousContent.filter((item) => {
@@ -54,9 +54,9 @@ function UserProfile({}) {
     } else {
       deleteArticle(id)
         .then((result) => {
-          setCardsRemoved((previousState) => {
-            return previousState + 1;
-          });
+          // setCardsRemoved((previousState) => {
+          //   return previousState + 1;
+          // });
 
           setUserContent((previousContent) => {
             const filteredContent = previousContent.filter((item) => {
@@ -102,12 +102,11 @@ function UserProfile({}) {
             };
           });
           setUserContent(contentObjects);
-          setUserContentTotal(comments.total_count);
+          // setUserContentTotal(comments.total_count);
 
           setCardsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           setCardsLoading(false);
         });
     } else {
@@ -124,12 +123,11 @@ function UserProfile({}) {
             };
           });
           setUserContent(contentObjects);
-          setUserContentTotal(articles.total_count);
+          // setUserContentTotal(articles.total_count);
 
           setCardsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           setCardsLoading(false);
         });
     }

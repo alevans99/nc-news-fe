@@ -15,9 +15,7 @@ function CommentCard({ comment }) {
 
     patchCommentVotes(comment.comment_id, voteChange)
       .then((result) => {})
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   return (
