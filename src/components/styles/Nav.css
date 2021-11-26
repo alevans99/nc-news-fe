@@ -9,12 +9,20 @@
   padding: 10px;
 }
 
-.nav-title {
+.nav-title-link {
   grid-area: title;
-  align-self: end;
-  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  text-decoration: none;
+  color: #eaeaea;
+}
+
+.nav-title {
   font-size: 4rem;
   line-height: 1;
+  text-decoration: none;
+  text-align: center;
 }
 .nav-topic-container {
   display: flex;

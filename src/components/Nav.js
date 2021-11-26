@@ -38,7 +38,9 @@ function Nav({ currentTopic, setCurrentTopic, allTopics }) {
 
   return (
     <div className={`Nav`}>
-      <h1 className='nav-title'>NC News</h1>
+      <Link className={'nav-title-link'} to={`/topics/all/articles`}>
+        <h1 className='nav-title'>NC News</h1>
+      </Link>
       <div className='nav-topic-container' ref={dropdownRef}>
         <button
           className='nav-topic'

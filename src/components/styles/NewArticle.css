@@ -1,0 +1,190 @@
+.NewArticle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-article-container {
+  width: 80%;
+  font-family: 'Raleway', sans-serif;
+  margin: 20px;
+}
+.new-article-page-title {
+  font-size: 2rem;
+}
+
+.new-article-form {
+  margin-top: 20px;
+}
+
+.new-article-fieldset {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.new-article-legend {
+}
+.new-article-article-title-label {
+}
+
+.new-article-title-input {
+  font-size: 1rem;
+  height: 40px;
+  padding: 6px;
+  width: 400px;
+}
+
+.new-article-topic-container {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.new-article-topic-title-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.new-article-topic-select-label {
+}
+
+.new-article-new-topic-button {
+  font-size: 1rem;
+  height: 40px;
+  width: 120px;
+  border-radius: 6px;
+  align-self: flex-end;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  border: #eaeaea 1px solid;
+  color: #eaeaea;
+  background-color: #ff2e63;
+}
+
+.new-article-new-topic-button:hover {
+  background-color: #fff;
+  color: #ff2e63;
+  border: #ff2e63 1px solid;
+}
+
+.new-article-new-topic-button:active {
+  background-color: #ffa8be;
+  color: #eaeaea;
+
+  border: #eaeaea 1px solid;
+}
+
+.new-article-topic-select {
+  font-size: 1rem;
+  height: 40px;
+  padding: 6px;
+  width: 200px;
+}
+
+.new-article-topic-option {
+}
+
+.new-article-article-body-label {
+}
+
+.new-article-article-body {
+  height: 40px;
+  padding: 6px;
+  width: 80%;
+  height: 300px;
+  font-family: 'Raleway', sans-serif;
+
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.new-article-submit-button {
+  font-size: 1rem;
+
+  height: 40px;
+  width: 120px;
+  border-radius: 6px;
+
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  border: #eaeaea 1px solid;
+  color: #eaeaea;
+  background-color: #ff2e63;
+}
+
+.new-article-submit-button:hover {
+  background-color: #fff;
+  color: #ff2e63;
+  border: #ff2e63 1px solid;
+}
+
+.new-article-submit-button:active {
+  background-color: #ffa8be;
+  color: #eaeaea;
+
+  border: #eaeaea 1px solid;
+}
+
+.new-topic-container {
+}
+
+.new-topic-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border: 1px #252a34 solid;
+  border-radius: 6px;
+}
+
+.new-topic-input {
+  font-size: 1rem;
+  height: 40px;
+  padding: 6px;
+  width: 400px;
+}
+
+.new-topic-description-input {
+  font-size: 1rem;
+  height: 40px;
+  padding: 6px;
+  width: 400px;
+}
+
+.new-topic-input-label {
+}
+
+.new-topic-input {
+}
+
+.new-topic-submit-button {
+  font-size: 1rem;
+
+  height: 40px;
+  width: 120px;
+  border-radius: 6px;
+
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  border: #eaeaea 1px solid;
+  color: #eaeaea;
+  background-color: #ff2e63;
+}
+
+.new-topic-submit-button:hover {
+  background-color: #fff;
+  color: #ff2e63;
+  border: #ff2e63 1px solid;
+}
+
+.new-topic-submit-button:active {
+  background-color: #ffa8be;
+  color: #eaeaea;
+
+  border: #eaeaea 1px solid;
+}

@@ -7,6 +7,8 @@
 .topic-dropdown-container {
   display: flex;
   flex-direction: column;
+  max-height: 60vh;
+  overflow-x: hidden;
 }
 
 .topic-dropdown-link {

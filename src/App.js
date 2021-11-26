@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getTopics } from './utils/api';
 import Articles from './components/Articles';
 import Article from './components/Article';
+import NewArticle from './components/NewArticle';
 
 function App() {
   const [allTopics, setAllTopics] = useState([]);
@@ -37,16 +38,16 @@ function App() {
               path='/'
               element={<Navigate replace to='/topics/all/articles' />}
             />
-            {/* <Route
-              path='/articles'
+            <Route
+              path='/articles/new'
               element={
-                <Articles
+                <NewArticle
                   allTopics={allTopics}
+                  setAllTopics={setAllTopics}
                   currentTopic={currentTopic}
-                  setCurrentTopic={setCurrentTopic}
-                ></Articles>
+                ></NewArticle>
               }
-            ></Route> */}
+            ></Route>
 
             <Route
               path='/articles/:article_id'

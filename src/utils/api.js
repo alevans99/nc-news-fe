@@ -10,6 +10,15 @@ export const getTopics = async () => {
   return topicObjects;
 };
 
+export const postNewTopic = async (slug, description) => {
+  const result = await newsApi.post(`/topics`, {
+    slug,
+    description,
+  });
+  const topicObject = result.data.topic;
+  return topicObject;
+};
+
 export const getArticles = async (topic, sortQuery, pageQuery) => {
   let optionalQueries = {};
 
@@ -32,6 +41,19 @@ export const getArticleById = async (articleId) => {
 export const patchArticleVotes = async (articleId, voteChange) => {
   const result = await newsApi.patch(`/articles/${articleId}`, {
     inc_votes: voteChange,
+  });
+  const articleObject = result.data.article;
+  return articleObject;
+};
+
+export const postNewArticle = async (author, title, body, topic) => {
+  console.log(author, title, body, topic);
+
+  const result = await newsApi.post(`/articles`, {
+    author,
+    title,
+    body,
+    topic,
   });
   const articleObject = result.data.article;
   return articleObject;

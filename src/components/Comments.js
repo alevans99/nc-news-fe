@@ -141,7 +141,12 @@ function Comments({ articleId }) {
         </Collapsable>
         <div className='comments-container'>
           {allComments.map((comment) => {
-            return <CommentCard comment={comment}></CommentCard>;
+            return (
+              <CommentCard
+                key={comment.comment_id}
+                comment={comment}
+              ></CommentCard>
+            );
           })}
           {scrollCommentsLoading ? (
             <div className='comments-loading-more-container'>
