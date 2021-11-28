@@ -18,6 +18,16 @@ function NewComment({
     useState('There was an issue with your submission');
 
   const submitNewComment = () => {
+    if (commentInput === '') {
+      setCommentValidationWarningText(
+        "Please make sure your comment isn't empty"
+      );
+      setCommentValidationWarning(true);
+      return;
+    }
+
+    setCommentValidationWarning(false);
+
     postNewComment(articleId, currentUser.username, commentInput)
       .then((comment) => {
         setNewCommentsAdded((previousTotal) => {
@@ -26,9 +36,16 @@ function NewComment({
         setAllComments((previousComments) => {
           return [comment, ...previousComments];
         });
+
+        setAddCommentVisible(false);
       })
-      .catch((err) => {});
-    setAddCommentVisible(false);
+
+      .catch((err) => {
+        setCommentValidationWarningText(
+          'Unfortunately there was an issue when trying to post your comment'
+        );
+        setCommentValidationWarning(true);
+      });
   };
 
   return (
@@ -37,15 +54,7 @@ function NewComment({
         className='new-comment-form'
         onSubmit={(e) => {
           e.preventDefault();
-          if (commentInput !== '') {
-            submitNewComment();
-            setCommentValidationWarning(false);
-          } else {
-            setCommentValidationWarningText(
-              "Please make sure your comment isn't empty"
-            );
-            setCommentValidationWarning(true);
-          }
+          submitNewComment();
         }}
       >
         <fieldset className='new-comment-form-fieldset'>

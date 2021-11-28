@@ -55,7 +55,12 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
       .then((result) => {
         navigate(`/topics/${topic.toLowerCase()}/articles`);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setNewArticleValidationText(
+          'Unfortunately there was an error adding the new topic'
+        );
+        SetNewArticleValidationVisible(true);
+      });
   };
 
   const addNewTopic = () => {
@@ -96,7 +101,12 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
           return [...previousTopics, result];
         });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setNewTopicValidationText(
+          'Unfortunately there was an error adding the new topic'
+        );
+        SetNewTopicValidationVisible(true);
+      });
   };
 
   return (

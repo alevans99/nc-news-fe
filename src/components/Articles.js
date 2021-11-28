@@ -37,6 +37,7 @@ function Articles({ allTopics, currentTopic, setCurrentTopic }) {
 
   useEffect(() => {
     setArticlesLoading(true);
+
     getArticles(currentTopic, sortQuery, pageQuery)
       .then((articles) => {
         setAllArticles(articles.articles);
@@ -49,7 +50,6 @@ function Articles({ allTopics, currentTopic, setCurrentTopic }) {
         setArticlesError(true);
         setArticlesLoading(false);
       });
-    // }
   }, [currentTopic, sortQuery, pageQuery]);
 
   return (

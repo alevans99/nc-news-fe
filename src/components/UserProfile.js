@@ -26,6 +26,10 @@ function UserProfile() {
   const [profileErrorText, setProfileErrorText] = useState(
     'There was an unexpected error'
   );
+  const [contentError, setContentError] = useState(false);
+  const [contentErrorText, setContentErrorText] = useState(
+    `Unable to load ${displayChoice} for this user`
+  );
 
   const { username } = useParams();
 
@@ -107,7 +111,7 @@ function UserProfile() {
           setCardsLoading(false);
         })
         .catch((err) => {
-          setCardsLoading(false);
+          setContentError(true);
         });
     } else {
       getArticlesByUsername(username, pageQuery)
@@ -128,7 +132,7 @@ function UserProfile() {
           setCardsLoading(false);
         })
         .catch((err) => {
-          setCardsLoading(false);
+          setContentError(true);
         });
     }
   }, [displayChoice, username]);
@@ -157,36 +161,40 @@ function UserProfile() {
           <option value='Comments'>Comments</option>
           <option value='Articles'>Articles</option>
         </select>
-        <Loading isLoading={cardsLoading}>
-          <div className='user-profile-cards-body'>
-            <div className='user-profile-cards-container'>
-              {userContent.map((content) => {
-                return username === currentUser.username ? (
-                  <div
-                    key={content.id}
-                    className='user-profile-individual-card-container'
-                  >
-                    <ProfileContentCard content={content}></ProfileContentCard>
-                    <button
-                      className='user-profile-card-delete-button'
-                      value={content.id}
-                      onClick={(e) => {
-                        handleDelete(e.target.value);
-                      }}
+        <ErrorMessage isVisible={contentError} errorText={contentErrorText}>
+          <Loading isLoading={cardsLoading}>
+            <div className='user-profile-cards-body'>
+              <div className='user-profile-cards-container'>
+                {userContent.map((content) => {
+                  return username === currentUser.username ? (
+                    <div
+                      key={content.id}
+                      className='user-profile-individual-card-container'
                     >
-                      Delete
-                    </button>
-                  </div>
-                ) : (
-                  <ProfileContentCard
-                    key={content.id}
-                    content={content}
-                  ></ProfileContentCard>
-                );
-              })}
+                      <ProfileContentCard
+                        content={content}
+                      ></ProfileContentCard>
+                      <button
+                        className='user-profile-card-delete-button'
+                        value={content.id}
+                        onClick={(e) => {
+                          handleDelete(e.target.value);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ) : (
+                    <ProfileContentCard
+                      key={content.id}
+                      content={content}
+                    ></ProfileContentCard>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        </Loading>
+          </Loading>
+        </ErrorMessage>
       </ErrorMessage>
     </div>
   );

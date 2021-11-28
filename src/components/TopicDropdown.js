@@ -24,7 +24,7 @@ const TopicDropdown = ({
                 updateTopic(e.target.value);
               }}
             >
-              All Categories
+              All Topics
             </button>
           </Link>
           {allTopics.map((topic) => {
