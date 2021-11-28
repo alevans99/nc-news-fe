@@ -6,6 +6,7 @@ import CommentCard from './CommentCard';
 import Loading from './Loading';
 import CollapsableContainer from './CollapsableContainer';
 import NewComment from './NewComment';
+import ErrorMessage from './ErrorMessage';
 
 function Comments({ articleId }) {
   const [allComments, setAllComments] = useState([]);
@@ -17,6 +18,11 @@ function Comments({ articleId }) {
   const [totalCommentsDisplayed, setTotalCommentsDisplayed] = useState(0);
   const [userReachedEnd, setUserReachedEnd] = useState(false);
   const [newCommentsAdded, setNewCommentsAdded] = useState(0);
+
+  const [commentsErrorVisible, setCommentsErrorVisible] = useState(false);
+  const [commentsErrorText, setCommentsErrorText] = useState(
+    'There was a problem loading the comments for this article.'
+  );
 
   const handlePostCommentButton = () => {
     setAddCommentVisible((previousState) => {
@@ -63,6 +69,8 @@ function Comments({ articleId }) {
   ]);
 
   useEffect(() => {
+    setCommentsErrorVisible(false);
+
     if (pageQuery === 1) {
       setCommentsLoading(true);
     } else {
@@ -96,6 +104,7 @@ function Comments({ articleId }) {
         setUserReachedEnd(false);
       })
       .catch((err) => {
+        setCommentsErrorVisible(true);
         setScrollCommentsLoading(false);
         setCommentsLoading(false);
       });
@@ -103,48 +112,53 @@ function Comments({ articleId }) {
 
   return (
     <div className={`Comments`}>
-      <Loading isLoading={commentsLoading} loadingText='Loading Comments'>
-        <h2 className='comments-title'>Comments</h2>
-        <button
-          className='comments-new-comment-button'
-          onClick={(e) => {
-            handlePostCommentButton();
-          }}
-        >
-          Post a Comment
-        </button>
-        <CollapsableContainer isVisible={addCommentVisible}>
-          <NewComment
-            setAddCommentVisible={setAddCommentVisible}
-            articleId={articleId}
-            setNewCommentsAdded={setNewCommentsAdded}
-            setAllComments={setAllComments}
-          ></NewComment>
-        </CollapsableContainer>
-        <div className='comments-container'>
-          {allComments.map((comment) => {
-            return (
-              <CommentCard
-                key={comment.comment_id}
-                comment={comment}
-              ></CommentCard>
-            );
-          })}
-          {scrollCommentsLoading ? (
-            <div className='comments-loading-more-container'>
-              <img
-                className='comments-loading-spinner'
-                src={loadingSpinner}
-                alt='spinning arrow'
-              ></img>
+      <ErrorMessage
+        isVisible={commentsErrorVisible}
+        errorText={commentsErrorText}
+      >
+        <Loading isLoading={commentsLoading} loadingText='Loading Comments'>
+          <h2 className='comments-title'>Comments</h2>
+          <button
+            className='comments-new-comment-button'
+            onClick={(e) => {
+              handlePostCommentButton();
+            }}
+          >
+            Post a Comment
+          </button>
+          <CollapsableContainer isVisible={addCommentVisible}>
+            <NewComment
+              setAddCommentVisible={setAddCommentVisible}
+              articleId={articleId}
+              setNewCommentsAdded={setNewCommentsAdded}
+              setAllComments={setAllComments}
+            ></NewComment>
+          </CollapsableContainer>
+          <div className='comments-container'>
+            {allComments.map((comment) => {
+              return (
+                <CommentCard
+                  key={comment.comment_id}
+                  comment={comment}
+                ></CommentCard>
+              );
+            })}
+            {scrollCommentsLoading ? (
+              <div className='comments-loading-more-container'>
+                <img
+                  className='comments-loading-spinner'
+                  src={loadingSpinner}
+                  alt='spinning arrow'
+                ></img>
 
-              <h2 className='comments-loading-text'>
-                Loading More Comments...
-              </h2>
-            </div>
-          ) : null}
-        </div>
-      </Loading>
+                <h2 className='comments-loading-text'>
+                  Loading More Comments...
+                </h2>
+              </div>
+            ) : null}
+          </div>
+        </Loading>
+      </ErrorMessage>
     </div>
   );
 }

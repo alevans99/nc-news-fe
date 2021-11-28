@@ -36,19 +36,6 @@ function Articles({ allTopics, currentTopic, setCurrentTopic }) {
   }, [pageRequested, topic, setCurrentTopic]);
 
   useEffect(() => {
-    // if (
-    //   !allTopics
-    //     .map((item) => {
-    //       return item.slug;
-    //     })
-    //     .includes(topic) &&
-    //   topic != 'all'
-    // ) {
-    //   setArticlesErrorText(
-    //     "This topic doesn't exist! Choose a different topic from the menu"
-    //   );
-    //   setArticlesError(true);
-    // } else {
     setArticlesLoading(true);
     getArticles(currentTopic, sortQuery, pageQuery)
       .then((articles) => {

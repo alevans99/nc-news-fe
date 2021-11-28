@@ -15,72 +15,87 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({ username: 'jessjelly' });
   const [currentTopic, setCurrentTopic] = useState('all');
+
+  const [appErrorVisible, setAppErrorVisible] = useState(false);
+  const [appErrorText, setAppErrorText] = useState(
+    'There was an issue loading data. Please try again later'
+  );
+
   //Maintain list of all topics
   useEffect(() => {
     getTopics()
       .then((topics) => {
+        setAppErrorVisible(false);
         setAllTopics(topics);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setAppErrorVisible(true);
+      });
   }, []);
 
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
         <div className='App'>
-          <Nav
-            currentTopic={currentTopic}
-            setCurrentTopic={setCurrentTopic}
-            allTopics={allTopics}
-          ></Nav>
-          <Routes>
-            <Route
-              path='/'
-              element={<Navigate replace to='/topics/all/articles' />}
-            />
-            <Route
-              path='/articles/new'
-              element={
-                <NewArticle
-                  allTopics={allTopics}
-                  setAllTopics={setAllTopics}
-                  currentTopic={currentTopic}
-                ></NewArticle>
-              }
-            ></Route>
+          <ErrorMessage isVisible={appErrorVisible} errorText={appErrorText}>
+            <Nav
+              currentTopic={currentTopic}
+              setCurrentTopic={setCurrentTopic}
+              allTopics={allTopics}
+            ></Nav>
 
-            <Route
-              path='/articles/:article_id'
-              element={<Article></Article>}
-            ></Route>
-            <Route
-              path='/topics/:topic/articles'
-              element={
-                <Articles
-                  allTopics={allTopics}
-                  currentTopic={currentTopic}
-                  setCurrentTopic={setCurrentTopic}
-                ></Articles>
-              }
-            ></Route>
+            <Routes>
+              <Route
+                path='/'
+                element={<Navigate replace to='/topics/all/articles' />}
+              />
+              <Route
+                path='/articles/new'
+                element={
+                  <NewArticle
+                    allTopics={allTopics}
+                    setAllTopics={setAllTopics}
+                    currentTopic={currentTopic}
+                  ></NewArticle>
+                }
+              ></Route>
 
-            <Route
-              path='/users/:username'
-              element={<UserProfile></UserProfile>}
-            ></Route>
-            <Route
-              path='/error'
-              element={
-                <ErrorMessage
-                  isVisible={true}
-                  errorText={
-                    "That page doesn't exist! Click on the title to go back to the homepage."
-                  }
-                ></ErrorMessage>
-              }
-            ></Route>
-            <Route path='/*' element={<Navigate replace to='/error' />}></Route>
-          </Routes>
+              <Route
+                path='/articles/:article_id'
+                element={<Article></Article>}
+              ></Route>
+              <Route
+                path='/topics/:topic/articles'
+                element={
+                  <Articles
+                    allTopics={allTopics}
+                    currentTopic={currentTopic}
+                    setCurrentTopic={setCurrentTopic}
+                  ></Articles>
+                }
+              ></Route>
+
+              <Route
+                path='/users/:username'
+                element={<UserProfile></UserProfile>}
+              ></Route>
+              <Route
+                path='/error'
+                element={
+                  <ErrorMessage
+                    isVisible={true}
+                    errorText={
+                      "That page doesn't exist! Click on the title to go back to the homepage."
+                    }
+                  ></ErrorMessage>
+                }
+              ></Route>
+              <Route
+                path='/*'
+                element={<Navigate replace to='/error' />}
+              ></Route>
+            </Routes>
+          </ErrorMessage>
         </div>
       </UserContext.Provider>
     </BrowserRouter>

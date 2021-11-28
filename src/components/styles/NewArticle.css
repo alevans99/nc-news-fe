@@ -29,6 +29,7 @@
 .new-article-legend {
 }
 .new-article-article-title-label {
+  text-align: left;
 }
 
 .new-article-title-input {
@@ -90,6 +91,7 @@
 }
 
 .new-article-article-body-label {
+  text-align: left;
 }
 
 .new-article-article-body {
@@ -140,6 +142,7 @@
   padding: 20px;
   border: 1px #252a34 solid;
   border-radius: 6px;
+  align-items: center;
 }
 
 .new-topic-input {
@@ -154,6 +157,9 @@
   height: 40px;
   padding: 6px;
   width: 400px;
+}
+
+.new-topic-title {
 }
 
 .new-topic-input-label {
