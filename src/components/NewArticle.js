@@ -5,6 +5,7 @@ import CollapsableContainer from './CollapsableContainer';
 import './styles/NewArticle.css';
 import { UserContext } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import ValidationWarning from './ValidationWarning';
 
 function NewArticle({ allTopics, setAllTopics, currentTopic }) {
   const [articleTitle, setArticleTitle] = useState('');
@@ -16,6 +17,9 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
   const [newTopicVisible, setNewTopicVisible] = useState(false);
   const [newTopic, setNewTopic] = useState('');
   const [newTopicDescription, setNewTopicDescription] = useState('');
+  const [newTopicValidationVisible, SetNewTopicValidationVisible] =
+    useState(false);
+  const [newTopicValidationText, setNewTopicValidationText] = useState('');
 
   const { currentUser } = useContext(UserContext);
   let navigate = useNavigate();
@@ -34,6 +38,31 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
   };
 
   const addNewTopic = () => {
+    if (!/^([a-z0-9-_ ])+$/.test(newTopic)) {
+      setNewTopicValidationText(
+        'New topics must be lower-case and only contain letters, numbers, hyphens and underscores'
+      );
+      SetNewTopicValidationVisible(true);
+      return;
+    }
+
+    if (newTopic.length < 4 || newTopic.length > 25) {
+      setNewTopicValidationText(
+        'New topics must be between 3-25 characters long'
+      );
+      SetNewTopicValidationVisible(true);
+      return;
+    }
+
+    if (newTopicDescription.length < 1) {
+      setNewTopicValidationText(
+        'Please provide a description for the new topic'
+      );
+      SetNewTopicValidationVisible(true);
+      return;
+    }
+
+    SetNewTopicValidationVisible(false);
     postNewTopic(newTopic.toLowerCase(), newTopicDescription)
       .then((result) => {
         setTopic(newTopic);
@@ -143,6 +172,10 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
                     >
                       Submit
                     </button>
+                    <ValidationWarning
+                      isVisible={newTopicValidationVisible}
+                      warningText={newTopicValidationText}
+                    ></ValidationWarning>
                   </div>
                 </div>
               </CollapsableContainer>
