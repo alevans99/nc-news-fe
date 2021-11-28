@@ -13,6 +13,9 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
   const [topic, setTopic] = useState(
     currentTopic !== 'all' ? capitaliseString(currentTopic) : 'Coding'
   );
+  const [newArticleValidationVisible, SetNewArticleValidationVisible] =
+    useState(false);
+  const [newArticleValidationText, setNewArticleValidationText] = useState('');
 
   const [newTopicVisible, setNewTopicVisible] = useState(false);
   const [newTopic, setNewTopic] = useState('');
@@ -25,6 +28,24 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
   let navigate = useNavigate();
 
   const addNewArticle = () => {
+    console.log('submit!');
+    console.log(articleTitle.length);
+
+    if (articleTitle.length < 4 || articleTitle.length > 25) {
+      setNewArticleValidationText(
+        'Article titles must be between 3-25 characters long'
+      );
+      SetNewArticleValidationVisible(true);
+      return;
+    }
+
+    if (articleBody.length < 1) {
+      setNewArticleValidationText('New articles must not be blank');
+      SetNewArticleValidationVisible(true);
+      return;
+    }
+    SetNewArticleValidationVisible(false);
+
     postNewArticle(
       currentUser.username,
       articleTitle,
@@ -63,6 +84,7 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
     }
 
     SetNewTopicValidationVisible(false);
+
     postNewTopic(newTopic.toLowerCase(), newTopicDescription)
       .then((result) => {
         setTopic(newTopic);
@@ -212,6 +234,10 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
                 setArticleBody(e.target.value);
               }}
             ></textarea>
+            <ValidationWarning
+              isVisible={newArticleValidationVisible}
+              warningText={newArticleValidationText}
+            ></ValidationWarning>
             <button className='new-article-submit-button'>Submit</button>
           </fieldset>
         </form>
