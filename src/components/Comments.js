@@ -20,9 +20,8 @@ function Comments({ articleId }) {
   const [newCommentsAdded, setNewCommentsAdded] = useState(0);
 
   const [commentsErrorVisible, setCommentsErrorVisible] = useState(false);
-  const [commentsErrorText, setCommentsErrorText] = useState(
-    'There was a problem loading the comments for this article.'
-  );
+  const commentsErrorText =
+    'There was a problem loading the comments for this article.';
 
   const handlePostCommentButton = () => {
     setAddCommentVisible((previousState) => {

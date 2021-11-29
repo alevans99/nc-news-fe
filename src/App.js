@@ -1,5 +1,5 @@
 import './App.css';
-import { UserContext } from './contexts/UserContext';
+import { UserContext, UserProvider } from './contexts/UserContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Nav from './components/Nav';
 import { useEffect, useState } from 'react';
@@ -13,13 +13,12 @@ import ErrorMessage from './components/ErrorMessage';
 function App() {
   const [allTopics, setAllTopics] = useState([]);
 
-  const [currentUser, setCurrentUser] = useState({ username: 'jessjelly' });
+  // const [currentUser, setCurrentUser] = useState({ username: 'jessjelly' });
   const [currentTopic, setCurrentTopic] = useState('all');
 
   const [appErrorVisible, setAppErrorVisible] = useState(false);
-  const [appErrorText, setAppErrorText] = useState(
-    'There was an issue loading data. Please try again later'
-  );
+  const appErrorText =
+    'There was an issue loading data. Please try again later';
 
   //Maintain list of all topics
   useEffect(() => {
@@ -35,7 +34,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+      {/* <UserContext.Provider value={{ currentUser, setCurrentUser }}> */}
+      <UserProvider>
         <div className='App'>
           <ErrorMessage isVisible={appErrorVisible} errorText={appErrorText}>
             <Nav
@@ -97,7 +97,8 @@ function App() {
             </Routes>
           </ErrorMessage>
         </div>
-      </UserContext.Provider>
+      </UserProvider>
+      {/* </UserContext.Provider> */}
     </BrowserRouter>
   );
 }
