@@ -59,6 +59,12 @@
 .comment-card-dec-arrow {
 }
 
+.inc-selected {
+  background-color: #b8fffe;
+}
+.dec-selected {
+  background-color: #ffd9e2;
+}
 .comment-card-vote-count {
   height: 40px;
   align-self: center;

@@ -1,5 +1,5 @@
 import './styles/CommentCard.css';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import incArrow from '../images/up-arrow.png';
 import decArrow from '../images/down-arrow.png';
 import { patchCommentVotes } from '../utils/api';
@@ -9,6 +9,8 @@ import { UserContext } from '../contexts/UserContext';
 function CommentCard({ comment }) {
   const [commentVotes, setCommentVotes] = useState(comment.votes);
   const { userCommentVotes, setUserCommentVotes } = useContext(UserContext);
+  const [incButtonSelected, setIncButtonSelected] = useState(false);
+  const [decButtonSelected, setDecButtonSelected] = useState(false);
 
   const updateUserCommentVotes = (changeInVotes) => {
     setUserCommentVotes((previousObject) => {
@@ -62,11 +64,18 @@ function CommentCard({ comment }) {
       .catch((err) => {});
   };
 
+  useEffect(() => {
+    setIncButtonSelected(userCommentVotes[comment.comment_id] === 1);
+    setDecButtonSelected(userCommentVotes[comment.comment_id] === -1);
+  }, [commentVotes, comment.comment_id]);
+
   return (
     <div className={`CommentCard`}>
       <div className='comment-card-vote-container'>
         <button
-          className='comment-card-inc-vote-button cc-vote-button'
+          className={`comment-card-inc-vote-button cc-vote-button ${
+            incButtonSelected ? 'inc-selected' : ''
+          }`}
           onClick={() => {
             changeVote(1);
           }}
@@ -80,7 +89,9 @@ function CommentCard({ comment }) {
         <h3 className='comment-card-vote-count'>{`${commentVotes}`}</h3>
 
         <button
-          className='comment-card-dec-vote-button cc-vote-button'
+          className={`comment-card-dec-vote-button cc-vote-button ${
+            decButtonSelected ? 'dec-selected' : ''
+          }`}
           onClick={() => {
             changeVote(-1);
           }}
