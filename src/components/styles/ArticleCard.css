@@ -33,12 +33,18 @@
   background-color: #dafefd;
   transform: translateY(1px);
 }
+
 .ac-vote-button {
   border-radius: 6px;
   padding: 10px;
   background-color: #fff;
 }
-
+.inc-selected {
+  background-color: #b8fffe;
+}
+.dec-selected {
+  background-color: #ffd9e2;
+}
 .ac-button-image {
   width: 40px;
 }

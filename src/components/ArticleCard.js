@@ -1,6 +1,6 @@
 import './styles/ArticleCard.css';
 import { Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import incArrow from '../images/up-arrow.png';
 import decArrow from '../images/down-arrow.png';
 import { patchArticleVotes } from '../utils/api';
@@ -9,6 +9,8 @@ import { UserContext } from '../contexts/UserContext';
 function ArticleCard({ article }) {
   const [articleVotes, setArticleVotes] = useState(article.votes);
   const { userArticleVotes, setUserArticleVotes } = useContext(UserContext);
+  const [incButtonSelected, setIncButtonSelected] = useState(false);
+  const [decButtonSelected, setDecButtonSelected] = useState(false);
 
   const updateUserArticleVotes = (changeInVotes) => {
     setUserArticleVotes((previousObject) => {
@@ -16,6 +18,10 @@ function ArticleCard({ article }) {
       newObject[article.article_id] = changeInVotes;
       return newObject;
     });
+  };
+
+  const checkUserVote = (idToCheck, valueToCheck) => {
+    return userArticleVotes[idToCheck] === valueToCheck;
   };
 
   const changeVote = (voteChange) => {
@@ -62,11 +68,18 @@ function ArticleCard({ article }) {
       .catch((err) => {});
   };
 
+  useEffect(() => {
+    setIncButtonSelected(userArticleVotes[article.article_id] === 1);
+    setDecButtonSelected(userArticleVotes[article.article_id] === -1);
+  }, [articleVotes, article.article_id]);
+
   return (
     <div className={`ArticleCard`}>
       <div className='article-card-vote-container'>
         <button
-          className='article-card-inc-vote-button ac-vote-button'
+          className={`article-card-inc-vote-button ac-vote-button ${
+            incButtonSelected ? 'inc-selected' : ''
+          }`}
           onClick={() => {
             changeVote(1);
           }}
@@ -80,7 +93,9 @@ function ArticleCard({ article }) {
         <h3 className='article-card-vote-count'>{`${articleVotes}`}</h3>
 
         <button
-          className='article-card-dec-vote-button ac-vote-button'
+          className={`article-card-dec-vote-button ac-vote-button ${
+            decButtonSelected ? 'dec-selected' : ''
+          }`}
           onClick={() => {
             changeVote(-1);
           }}
