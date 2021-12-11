@@ -20,10 +20,6 @@ function ArticleCard({ article }) {
     });
   };
 
-  const checkUserVote = (idToCheck, valueToCheck) => {
-    return userArticleVotes[idToCheck] === valueToCheck;
-  };
-
   const changeVote = (voteChange) => {
     let amountToChange = 0;
 
@@ -71,7 +67,7 @@ function ArticleCard({ article }) {
   useEffect(() => {
     setIncButtonSelected(userArticleVotes[article.article_id] === 1);
     setDecButtonSelected(userArticleVotes[article.article_id] === -1);
-  }, [articleVotes, article.article_id]);
+  }, [articleVotes, article.article_id, userArticleVotes]);
 
   return (
     <div className={`ArticleCard`}>
@@ -125,7 +121,6 @@ function ArticleCard({ article }) {
           className='article-card-topic-link'
         >{`${article.topic}`}</Link>
       </h3>
-      {/* <button className='article-card-read-button'>Read Article</button> */}
       <h3 className='article-card-comments-count'>
         {`${article.comment_count}${
           article.comment_count === 1 ? ' Comment' : ' Comments'
