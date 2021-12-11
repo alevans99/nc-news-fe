@@ -113,10 +113,23 @@ function ArticleCard({ article }) {
       >
         <h2 className='article-card-title'>{article.title}</h2>
       </Link>
-      <h3 className='article-card-author'>{`Posted by ${article.author} in ${article.topic}`}</h3>
+      <h3 className='article-card-author'>
+        {`Posted by `}
+        <Link
+          to={`/users/${article.author}`}
+          className='article-card-author-link'
+        >{`${article.author} `}</Link>
+        {`in`}{' '}
+        <Link
+          to={`/topics/${article.topic}/articles`}
+          className='article-card-topic-link'
+        >{`${article.topic}`}</Link>
+      </h3>
       {/* <button className='article-card-read-button'>Read Article</button> */}
       <h3 className='article-card-comments-count'>
-        {`${article.comment_count} Comments`}
+        {`${article.comment_count}${
+          article.comment_count === 1 ? ' Comment' : ' Comments'
+        }`}
       </h3>
     </div>
   );

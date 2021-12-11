@@ -92,6 +92,18 @@
   align-self: flex-end;
 }
 
+.article-card-author-link,
+.article-card-topic-link {
+  text-decoration: none;
+  color: #ff2e63;
+}
+
+.article-card-author-link:hover,
+.article-card-topic-link:hover {
+  text-decoration: none;
+  color: #08d9d6;
+}
+
 .article-card-comments-count {
   grid-area: card-comments;
   justify-self: end;
