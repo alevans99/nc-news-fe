@@ -10,22 +10,23 @@
 }
 .user-profile-user-details-container {
   margin: 20px;
-  display: grid;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
 }
 
 .user-profile-username-title {
-  font-size: 3rem;
+  font-size: 4rem;
   padding: 20px;
 }
 
 .user-profile-image {
-  height: 300px;
-  width: 300px;
-  border-radius: 6px;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  padding: 10px;
 }
 
 .user-profile-votes-container {
@@ -91,4 +92,32 @@
   .user-profile-username-title {
     margin: 20px 0;
   }
+}
+
+.cards-loading-more-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cards-loading-spinner {
+  margin-bottom: 20px;
+  width: 100px;
+  height: 140px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.cards-loading-text {
+  font-size: 2rem;
 }
