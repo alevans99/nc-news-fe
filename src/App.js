@@ -1,5 +1,5 @@
 import './App.css';
-import { UserContext, UserProvider } from './contexts/UserContext';
+import { UserProvider } from './contexts/UserContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Nav from './components/Nav';
 import { useEffect, useState } from 'react';

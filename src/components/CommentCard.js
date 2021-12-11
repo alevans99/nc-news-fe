@@ -67,7 +67,7 @@ function CommentCard({ comment }) {
   useEffect(() => {
     setIncButtonSelected(userCommentVotes[comment.comment_id] === 1);
     setDecButtonSelected(userCommentVotes[comment.comment_id] === -1);
-  }, [commentVotes, comment.comment_id]);
+  }, [commentVotes, comment.comment_id, userCommentVotes]);
 
   return (
     <div className={`CommentCard`}>
