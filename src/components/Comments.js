@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import loadingSpinner from '../images/spinner.png';
 import { getComments } from '../utils/api';
 import './styles/Comments.css';
@@ -67,6 +67,10 @@ function Comments({ articleId }) {
     scrollCommentsLoading,
   ]);
 
+  const getNumberOfNewComments = useCallback(() => {
+    return newCommentsAdded;
+  }, [newCommentsAdded]);
+
   useEffect(() => {
     setCommentsErrorVisible(false);
 
@@ -83,13 +87,15 @@ function Comments({ articleId }) {
         });
 
         setAllComments((previousComments) => {
-          if (newCommentsAdded > 9) {
+          if (getNumberOfNewComments() > 9) {
             setNewCommentsAdded((previousTotal) => {
               return previousTotal - 10;
             });
             return [...previousComments];
           } else {
-            const newComments = comments.comments.slice(newCommentsAdded);
+            const newComments = comments.comments.slice(
+              getNumberOfNewComments()
+            );
             return [...previousComments, ...newComments];
           }
         });
@@ -107,7 +113,7 @@ function Comments({ articleId }) {
         setScrollCommentsLoading(false);
         setCommentsLoading(false);
       });
-  }, [articleId, pageQuery]);
+  }, [articleId, pageQuery, getNumberOfNewComments]);
 
   return (
     <div className={`Comments`}>
