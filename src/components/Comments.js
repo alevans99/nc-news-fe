@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import loadingSpinner from '../images/spinner.png';
 import { getComments } from '../utils/api';
 import './styles/Comments.css';
@@ -18,6 +18,7 @@ function Comments({ articleId }) {
   const [totalCommentsDisplayed, setTotalCommentsDisplayed] = useState(0);
   const [userReachedEnd, setUserReachedEnd] = useState(false);
   const [newCommentsAdded, setNewCommentsAdded] = useState(0);
+  const newCommentsAddedRef = useRef(0);
 
   const [commentsErrorVisible, setCommentsErrorVisible] = useState(false);
   const commentsErrorText =
@@ -30,6 +31,12 @@ function Comments({ articleId }) {
   };
 
   useEffect(() => {
+    console.log('uppdating the unmber of new comments added');
+    newCommentsAddedRef.current = newCommentsAdded;
+  }, [newCommentsAdded]);
+
+  useEffect(() => {
+    console.log('Moving to top of the page');
     window.scrollTo(0, 0);
   }, []);
 
@@ -43,9 +50,11 @@ function Comments({ articleId }) {
         !scrollCommentsLoading
       ) {
         setUserReachedEnd(true);
+        console.log('HandelScroll called');
 
         if (totalCommentsDisplayed < totalComments) {
           setPageQuery((previousPage) => {
+            console.log('increasing page query');
             return previousPage + 1;
           });
         } else {
@@ -53,9 +62,11 @@ function Comments({ articleId }) {
         }
       }
     }
+    if (!userReachedEnd && !commentsLoading && !scrollCommentsLoading) {
+      console.log('Setting eventlistener for scroll');
 
-    window.addEventListener('scroll', handleScroll);
-
+      window.addEventListener('scroll', handleScroll);
+    }
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -72,12 +83,15 @@ function Comments({ articleId }) {
   }, [newCommentsAdded]);
 
   useEffect(() => {
+    console.log('initial comment getter useeffect');
     setCommentsErrorVisible(false);
 
     if (pageQuery === 1) {
       setCommentsLoading(true);
+      console.log('comments loading');
     } else {
       setScrollCommentsLoading(true);
+      console.log('scroll comments loading');
     }
 
     getComments(articleId, pageQuery)
@@ -87,14 +101,14 @@ function Comments({ articleId }) {
         });
 
         setAllComments((previousComments) => {
-          if (getNumberOfNewComments() > 9) {
+          if (newCommentsAddedRef.current > 9) {
             setNewCommentsAdded((previousTotal) => {
               return previousTotal - 10;
             });
             return [...previousComments];
           } else {
             const newComments = comments.comments.slice(
-              getNumberOfNewComments()
+              newCommentsAddedRef.current
             );
             return [...previousComments, ...newComments];
           }
@@ -113,7 +127,7 @@ function Comments({ articleId }) {
         setScrollCommentsLoading(false);
         setCommentsLoading(false);
       });
-  }, [articleId, pageQuery, getNumberOfNewComments]);
+  }, [articleId, pageQuery]);
 
   return (
     <div className={`Comments`}>
