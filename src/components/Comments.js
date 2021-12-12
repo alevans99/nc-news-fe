@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import loadingSpinner from '../images/spinner.png';
 import { getComments } from '../utils/api';
 import './styles/Comments.css';
@@ -77,10 +77,6 @@ function Comments({ articleId }) {
     commentsLoading,
     scrollCommentsLoading,
   ]);
-
-  const getNumberOfNewComments = useCallback(() => {
-    return newCommentsAdded;
-  }, [newCommentsAdded]);
 
   useEffect(() => {
     console.log('initial comment getter useeffect');

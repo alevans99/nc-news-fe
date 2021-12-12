@@ -152,7 +152,7 @@ function UserProfile() {
   const loadMoreCards = useCallback(
     (pageRequested) => {
       setScrollCardsLoading(true);
-
+      console.log('loading more cards for page ', pageRequested);
       if (displayChoice === 'Comments') {
         getCommentsByUsername(username, pageRequested)
           .then((comments) => {
@@ -166,8 +166,11 @@ function UserProfile() {
                 link: `/articles/${comment.article_id}`,
               };
             });
+            console.log('new content objects are ', contentObjects);
 
             setUserContent((previousObjects) => {
+              console.log('old ones are ', previousObjects);
+
               const newObjects = [...previousObjects, ...contentObjects];
               return newObjects;
             });
@@ -218,6 +221,15 @@ function UserProfile() {
             setCardsLoading(false);
           });
       }
+
+      return () => {
+        setUserContent({});
+        setScrollCardsLoading(false);
+        setUserReachedEnd(false);
+        setCardsLoading(false);
+        setContentError(false);
+        setTotalCardsDisplayed(0);
+      };
     },
     [displayChoice, username]
   );
