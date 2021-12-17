@@ -28,8 +28,6 @@ function NewArticle({ allTopics, setAllTopics, currentTopic }) {
   let navigate = useNavigate();
 
   const addNewArticle = () => {
-    console.log('submit!');
-    console.log(articleTitle.length);
 
     if (articleTitle.length < 4 || articleTitle.length > 25) {
       setNewArticleValidationText(
