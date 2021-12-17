@@ -31,12 +31,10 @@ function Comments({ articleId }) {
   };
 
   useEffect(() => {
-    console.log('uppdating the unmber of new comments added');
     newCommentsAddedRef.current = newCommentsAdded;
   }, [newCommentsAdded]);
 
   useEffect(() => {
-    console.log('Moving to top of the page');
     window.scrollTo(0, 0);
   }, []);
 
@@ -50,11 +48,9 @@ function Comments({ articleId }) {
         !scrollCommentsLoading
       ) {
         setUserReachedEnd(true);
-        console.log('HandelScroll called');
 
         if (totalCommentsDisplayed < totalComments) {
           setPageQuery((previousPage) => {
-            console.log('increasing page query');
             return previousPage + 1;
           });
         } else {
@@ -63,7 +59,6 @@ function Comments({ articleId }) {
       }
     }
     if (!userReachedEnd && !commentsLoading && !scrollCommentsLoading) {
-      console.log('Setting eventlistener for scroll');
 
       window.addEventListener('scroll', handleScroll);
     }
@@ -78,20 +73,15 @@ function Comments({ articleId }) {
     scrollCommentsLoading,
   ]);
 
-  const getNumberOfNewComments = useCallback(() => {
-    return newCommentsAdded;
-  }, [newCommentsAdded]);
+
 
   useEffect(() => {
-    console.log('initial comment getter useeffect');
     setCommentsErrorVisible(false);
 
     if (pageQuery === 1) {
       setCommentsLoading(true);
-      console.log('comments loading');
     } else {
       setScrollCommentsLoading(true);
-      console.log('scroll comments loading');
     }
 
     getComments(articleId, pageQuery)

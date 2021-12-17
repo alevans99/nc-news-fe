@@ -91,7 +91,6 @@ function UserProfile() {
   //Deals with loading initial comments/articles and loads the first page of
   //comments or articles when user changes selection
   useEffect(() => {
-    console.log('initial useeffect triggered');
     window.scrollTo(0, 0);
 
     setCardsLoading(true);
@@ -235,13 +234,10 @@ function UserProfile() {
         !scrollCardsLoading
       ) {
         setUserReachedEnd(true);
-        console.log('bottom of page');
         if (totalCardsDisplayed < totalCards) {
           pageQuery.current = pageQuery.current + 1;
-          console.log('reset page query ', pageQuery);
           loadMoreCards(pageQuery.current);
         } else {
-          console.log('There are no more cards to load');
         }
       }
     }
