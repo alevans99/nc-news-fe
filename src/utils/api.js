@@ -1,6 +1,6 @@
 import axios from 'axios';
 const newsApi = axios.create({
-  baseURL: 'https://nc-news-ae.herokuapp.com/api',
+  baseURL: 'https://nc-news-be-ae.up.railway.app/api',
 });
 
 export const getTopics = async () => {

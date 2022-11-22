@@ -73,11 +73,8 @@ function Comments({ articleId }) {
     scrollCommentsLoading,
   ]);
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> be18a0a40d0ac1ff4a71b08afc4c39eaacd7317f
   useEffect(() => {
     setCommentsErrorVisible(false);
 
