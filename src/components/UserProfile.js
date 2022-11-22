@@ -217,6 +217,15 @@ function UserProfile() {
             setCardsLoading(false);
           });
       }
+      
+      return () => {
+        setUserContent({});
+        setScrollCardsLoading(false);
+        setUserReachedEnd(false);
+        setCardsLoading(false);
+        setContentError(false);
+        setTotalCardsDisplayed(0);
+      };
     },
     [displayChoice, username]
   );
